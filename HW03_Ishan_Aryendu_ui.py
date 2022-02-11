@@ -6,13 +6,13 @@ from colorama import Fore
 import HW03_Ishan_Aryendu_wordle
 
 
-def welcome_message(word_length, max_tries):
+def welcome_message(word_length, max_tries, games_played):
     """
     :param word_length: length of the chosen word
     :param max_tries: maximum number of user tries
     """
-    print(Fore.GREEN + f'Guess a {word_length} letter word. You have {max_tries} chances. \nEnter an empty string to '
-                       f'terminate. \nBEGIN...')
+    print(Fore.GREEN + f'\nGuess a {word_length} letter word. You have {max_tries} chances. \nEnter an empty string to '
+                       f'terminate. \nGame {games_played+1} BEGIN...')
 
 
 def game_over():
@@ -141,3 +141,14 @@ def not_in_list():
     """
     print(Fore.RED + 'Not in word list! Try Again...')
     return ""
+
+
+def stats(games_played, wins, guess_dist):
+    """
+    display the game statistics (number of games played, win percentage, and the guess distribution)
+    """
+    print(f"Total number of games played: {games_played}")
+    print(f"Win percentage: {(wins/games_played) * 100}")
+    print(f"Guess distribution: ", end='')
+    print(guess_dist)
+

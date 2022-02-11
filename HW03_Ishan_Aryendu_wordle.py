@@ -23,12 +23,12 @@ HW03_Ishan_Aryendu_wordle.py
 HW03_Ishan_Aryendu_dictionary.py
 """
 from random import choice
-from HW03_Ishan_Aryendu_dictionary import get_words_from_file
+from HW03_Ishan_Aryendu_dictionary import *
 from colorama import Fore
 
-import HW03_Ishan_Aryendu_ui
 import re
 
+from HW03_Ishan_Aryendu_ui import *
 
 def main(flag=None, given_word=None, match=None, mismatch=None, prev_tries=None, prompt=None, retries=None):
     # set the default parameters
@@ -41,43 +41,58 @@ def main(flag=None, given_word=None, match=None, mismatch=None, prev_tries=None,
     flag, given_word, match, mismatch, prev_tries, prompt, retries = re_init(all_words, flag, given_word, match,
                                                                              mismatch, prev_tries, prompt,
                                                                              retries)
-    HW03_Ishan_Aryendu_ui.welcome_message(WORD_LENGTH, MAX_TRIES)
-    while retries != MAX_TRIES:
-        prompt = HW03_Ishan_Aryendu_ui.user_input(WORD_LENGTH, MAX_TRIES, retries, match, mismatch)
-        if prompt == "":
+    prompt = "_____"
+    games_played = 0
+    wins = 0
+    guess_dist = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+    while prompt != "":
+        welcome_message(WORD_LENGTH, MAX_TRIES, games_played)
+        while retries != MAX_TRIES:
+            prompt = user_input(WORD_LENGTH, MAX_TRIES, retries, match, mismatch)
+            if prompt == "":
+                break
+            elif prompt not in all_words:
+                not_in_list()
+                continue
+            # if prompt is None or HW03_Ishan_Aryendu_ui.previously_tried(prompt, prev_tries):
+            #     continue
+            if previously_tried(prompt, prev_tries):
+                continue
+            # HW03_Ishan_Aryendu_ui.letter_status(match, mismatch)
+            prev_tries.add(prompt)
+            # given_char_dict = {}
+            # input_char_dict = {}
+            given_char_dict = create_char_dict(given_word)
+            # print(given_char_dict)
+            input_char_dict = create_char_dict(prompt)
+            # print(input_char_dict)
+            # green_dict = {}
+            # yellow_set = set()
+            # red_set = set()
+            for letter_of_given_word, letter_of_input_word in zip(given_word, prompt):
+                set_char_color(letter_of_given_word, letter_of_input_word, given_word, match,
+                                                     mismatch, given_char_dict, input_char_dict)
+            # increment the counter
+            retries += 1
+            # increment the number of games played
+            games_played += 1
+            # match the words
+            flag = match_words(prompt, given_word, MAX_TRIES, retries)
+            if flag:
+                # update guess distribution
+                guess_dist[retries] += 1
+                flag, given_word, match, mismatch, prev_tries, prompt, retries = re_init(all_words, flag, given_word,
+                                                                                         match,
+                                                                                         mismatch, prev_tries, prompt,
+                                                                                         retries)
+                wins += 1
+                break
+        stats(games_played, wins, guess_dist)
+        # check for termination of the program
+        if retries == MAX_TRIES and not flag:
+            game_over()
             break
-        elif prompt not in all_words:
-            HW03_Ishan_Aryendu_ui.not_in_list()
-            continue
-        # if prompt is None or HW03_Ishan_Aryendu_ui.previously_tried(prompt, prev_tries):
-        #     continue
-        if HW03_Ishan_Aryendu_ui.previously_tried(prompt, prev_tries):
-            continue
-        # HW03_Ishan_Aryendu_ui.letter_status(match, mismatch)
-        prev_tries.add(prompt)
-        # given_char_dict = {}
-        # input_char_dict = {}
-        given_char_dict = create_dict(given_word)
-        # print(given_char_dict)
-        input_char_dict = create_dict(prompt)
-        # print(input_char_dict)
-        # green_dict = {}
-        # yellow_set = set()
-        # red_set = set()
-        for letter_of_given_word, letter_of_input_word in zip(given_word, prompt):
-            HW03_Ishan_Aryendu_ui.set_char_color(letter_of_given_word, letter_of_input_word, given_word, match,
-                                                 mismatch, given_char_dict, input_char_dict)
-        # increment the counter
-        retries += 1
-        # match the words
-        flag = HW03_Ishan_Aryendu_ui.match_words(prompt, given_word, MAX_TRIES, retries)
-        if flag:
-            flag, given_word, match, mismatch, prev_tries, prompt, retries = re_init(all_words, flag, given_word, match,
-                                                                                     mismatch, prev_tries, prompt,
-                                                                                     retries)
-    # check for termination of the program
-    if retries == MAX_TRIES and not flag:
-        HW03_Ishan_Aryendu_ui.game_over()
+
 
 
 def valid_input(prompt: str, word_length: int):
@@ -94,7 +109,7 @@ def valid_input(prompt: str, word_length: int):
         return True
 
 
-def create_dict(word):
+def create_char_dict(word):
     """
     create a character dictionary
     """
@@ -114,10 +129,10 @@ def re_init(all_words, flag, given_word, match, mismatch, prev_tries, prompt, re
     # given_word = "sooon"
     given_word = choice(all_words)
     # debugging
-    print('The selected word is', given_word)
+    print(Fore.WHITE + '\nThe selected word is', given_word)
     # initialize the required variables
     retries = 0
-    prompt = ""
+    prompt = "_____"
     flag = False
     match = set()
     mismatch = set()
