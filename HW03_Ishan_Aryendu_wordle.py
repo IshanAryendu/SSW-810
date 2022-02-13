@@ -47,6 +47,8 @@ def main(flag=None, given_word=None, match=None, mismatch=None, prev_tries=None,
     guess_dist = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
     while prompt != "":
         welcome_message(WORD_LENGTH, MAX_TRIES, games_played)
+        # increment the number of games played
+        games_played += 1
         while retries != MAX_TRIES:
             prompt = user_input(WORD_LENGTH, MAX_TRIES, retries, match, mismatch)
             if prompt == "":
@@ -74,8 +76,7 @@ def main(flag=None, given_word=None, match=None, mismatch=None, prev_tries=None,
                                                      mismatch, given_char_dict, input_char_dict)
             # increment the counter
             retries += 1
-            # increment the number of games played
-            games_played += 1
+
             # match the words
             flag = match_words(prompt, given_word, MAX_TRIES, retries)
             if flag:
