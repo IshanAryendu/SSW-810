@@ -9,18 +9,6 @@ __status__ = "Development"
 __packages__ = ['colorama', 're']
 
 Note: install colorama before running the code with: pip install colorama
-
-bonus 1 point: Correctly implement incorrect letter locations without counting the letters (i.e., come with an
-alternative design). - The Fastest algorithm would be to map each of the 26 English characters to a unique prime number.
-                       Then calculate the product of the string. By the fundamental theorem of arithmetic, 2 strings
-                       are anagrams if and only if their products are the same.
-
-Deliverable
-You should submit your solution as two files named
-
-HW03_Ishan_Aryendu_ui.py
-HW03_Ishan_Aryendu_wordle.py
-HW03_Ishan_Aryendu_dictionary.py
 """
 from random import choice
 from HW03_Ishan_Aryendu_dictionary import *
@@ -100,6 +88,10 @@ def valid_input(prompt: str, word_length: int):
     """
     validate the user input
     """
+    if type(prompt) != str:
+        raise TypeError("Invalid type")
+    if len(prompt) != word_length:
+        raise ValueError("Invalid word length")
     if len(prompt.strip()) != word_length:
         print(Fore.RED + f"Try again with a {word_length} letter word.")
         return False
