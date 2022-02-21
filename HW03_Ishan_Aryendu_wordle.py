@@ -40,6 +40,7 @@ def main(flag=None, given_word=None, match=None, mismatch=None, prev_tries=None,
         while retries != MAX_TRIES:
             prompt = user_input(WORD_LENGTH, MAX_TRIES, retries, match, mismatch)
             if prompt == "":
+                games_played -= 1
                 break
             elif prompt not in all_words:
                 not_in_list()
