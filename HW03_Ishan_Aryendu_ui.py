@@ -51,7 +51,7 @@ def previously_tried(prompt, prev_tries):
     """
     check if a string has been tried before
     """
-    if prompt in prev_tries:
+    if prompt.lower() in prev_tries:
         print(Fore.YELLOW + f"You have already tried {prompt}")
         return True
     else:
