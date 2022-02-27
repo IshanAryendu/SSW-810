@@ -15,8 +15,10 @@ from HW03_Ishan_Aryendu_dictionary import *
 from colorama import Fore
 
 import re
+import sys
 
 from HW03_Ishan_Aryendu_ui import *
+
 
 def main(flag=None, given_word=None, match=None, mismatch=None, prev_tries=None, prompt=None, retries=None):
     # set the default parameters
@@ -24,11 +26,11 @@ def main(flag=None, given_word=None, match=None, mismatch=None, prev_tries=None,
     # given_word = 'sooon'
     WORD_LENGTH = 5
     MAX_TRIES = 6
-    FILE_PATH = 'resource/word_list'
+    FILE_PATH = 'resource/word5.txt'
     all_words = list(get_words_from_file(FILE_PATH, word_length=WORD_LENGTH))
+    max_limit = len(all_words)
     flag, given_word, match, mismatch, prev_tries, prompt, retries = re_init(all_words, flag, given_word, match,
-                                                                             mismatch, prev_tries, prompt,
-                                                                         retries)
+                                                                             mismatch, prev_tries, prompt, retries)
     prompt = "_____"
     games_played = 0
     wins = 0
@@ -36,12 +38,17 @@ def main(flag=None, given_word=None, match=None, mismatch=None, prev_tries=None,
     # given_word = ""
     given_word = gen_word(all_words)
     while prompt != "":
+        if prev_tries == len(all_words):
+            main()
         welcome_message(WORD_LENGTH, MAX_TRIES, games_played)
         # increment the number of games played
         games_played += 1
-        wins = play(MAX_TRIES, WORD_LENGTH, match, mismatch, games_played, all_words, prev_tries, given_word, retries,
-             guess_dist, wins)
-
+        try:
+            temp = wins
+            wins += play(MAX_TRIES, WORD_LENGTH, match, mismatch, games_played, all_words, prev_tries, given_word,
+                         retries, guess_dist, wins)
+        except TypeError:
+            wins = temp
         # while retries != MAX_TRIES:
         #     prompt = user_input(WORD_LENGTH, MAX_TRIES, retries, match, mismatch)
         #     if prompt == "":
@@ -91,11 +98,13 @@ def main(flag=None, given_word=None, match=None, mismatch=None, prev_tries=None,
             game_over()
             break
 
+
 def gen_word(all_words):
     tmp_word = choice(all_words)
     # debugging
     print(Fore.WHITE + '\nThe selected word is', tmp_word)
     return tmp_word
+
 
 def valid_input(prompt: str, word_length: int):
     """
@@ -147,11 +156,13 @@ def re_init(all_words, flag, given_word, match, mismatch, prev_tries, prompt, re
 
 
 def play(MAX_TRIES, WORD_LENGTH, match, mismatch, games_played, all_words, prev_tries, given_word, retries,
-             guess_dist, wins):
+         guess_dist, wins):
     while retries != MAX_TRIES:
-        prompt = user_input(WORD_LENGTH, MAX_TRIES, retries, match, mismatch)
-        if prompt == "":
-            games_played -= 1
+        prompt = user_input(WORD_LENGTH, MAX_TRIES, retries, match, mismatch, games_played, all_words, prev_tries,
+                            given_word, guess_dist, wins)
+        # print('"'+prompt+'"')
+        if prompt == "quit":
+            exit_func()
             break
         elif prompt not in all_words:
             not_in_list()
@@ -186,9 +197,13 @@ def play(MAX_TRIES, WORD_LENGTH, match, mismatch, games_played, all_words, prev_
                                                                                      match,
                                                                                      mismatch, prev_tries, prompt,
                                                                                      retries)
-            wins += 1
-            return wins
+            # wins += 1
+            return 1
 
+
+def exit_func():
+    game_over()
+    sys.exit("Quitting...")
 
 if __name__ == '__main__':
     main()
