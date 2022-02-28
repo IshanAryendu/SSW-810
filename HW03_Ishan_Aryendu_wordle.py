@@ -26,7 +26,7 @@ def main(flag=None, given_word=None, match=None, mismatch=None, prev_tries=None,
     # given_word = 'sooon'
     WORD_LENGTH = 5
     MAX_TRIES = 6
-    FILE_PATH = 'resource/word5.txt'
+    FILE_PATH = 'resource/word_list'
     LOG_FILE_PATH = 'log/gameplay.log'
     all_words = list(get_words_from_file(FILE_PATH, word_length=WORD_LENGTH))
     max_limit = len(all_words)
@@ -155,6 +155,22 @@ def re_init(all_words, flag, given_word, match, mismatch, prev_tries, prompt, re
     mismatch = set()
     prev_tries = set()
     return flag, given_word, match, mismatch, prev_tries, prompt, retries
+
+def log_gameplay(log_file_loc, given_word, input_word, games_played, wins, guess_dist):
+    # log the gameplay
+    # selected word, user input, user report
+    f = open(log_file_loc, "a")
+    f.write(f"Selected word: {given_word}")
+    f.write("\n")
+    f.write(f"User's input: {input_word}")
+    f.write("\n")
+    f.write(f"Total number of games played: {games_played}")
+    f.write("\n")
+    f.write(f"Win percentage: {(wins / games_played) * 100}")
+    f.write("\n")
+    f.write(f"Guess distribution: {guess_dist}")
+    f.write("\n")
+    f.close()
 
 
 def play(MAX_TRIES, WORD_LENGTH, match, mismatch, games_played, all_words, prev_tries, given_word, retries,
