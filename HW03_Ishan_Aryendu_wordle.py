@@ -156,6 +156,7 @@ def re_init(all_words, flag, given_word, match, mismatch, prev_tries, prompt, re
     prev_tries = set()
     return flag, given_word, match, mismatch, prev_tries, prompt, retries
 
+
 def log_gameplay(log_file_loc, given_word, input_word, games_played, wins, guess_dist):
     # log the gameplay
     # selected word, user input, user report
@@ -175,6 +176,20 @@ def log_gameplay(log_file_loc, given_word, input_word, games_played, wins, guess
 
 def play(MAX_TRIES, WORD_LENGTH, match, mismatch, games_played, all_words, prev_tries, given_word, retries,
          guess_dist, wins):
+    """
+    :param MAX_TRIES:
+    :param WORD_LENGTH:
+    :param match:
+    :param mismatch:
+    :param games_played:
+    :param all_words:
+    :param prev_tries:
+    :param given_word:
+    :param retries:
+    :param guess_dist:
+    :param wins:
+    :return: count as 1 if everything goes without any errors
+    """
     while retries != MAX_TRIES:
         prompt = user_input(WORD_LENGTH, MAX_TRIES, retries, match, mismatch, games_played, all_words, prev_tries,
                             given_word, guess_dist, wins)
@@ -243,6 +258,7 @@ def log_gameplay(log_file_loc, given_word, input_word, games_played, wins, guess
 def exit_func():
     game_over()
     sys.exit("Quitting...")
+
 
 if __name__ == '__main__':
     main()
