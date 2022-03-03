@@ -19,16 +19,23 @@ def game_over():
     print(Fore.RED + 'GAME OVER!')
 
 
-def user_input(WORD_LENGTH, MAX_TRIES, retries, match, mismatch, games_played, all_words, prev_tries, given_word, guess_dist, wins):
+def user_input(WORD_LENGTH: object, MAX_TRIES: object, retries: object, match: object, mismatch: object, games_played: object, all_words: object, prev_tries: object,
+               given_word: object,
+               guess_dist: object,
+               wins: object) -> object:
     """
     take the user input
-    :param match:
-    :param played:
-    :param words:
-    :param tries:
-    :param word:
-    :param dist:
+    :param WORD_LENGTH:
+    :param MAX_TRIES:
+    :param retries:
+    :param mismatch:
+    :param games_played:
+    :param all_words:
+    :param prev_tries:
+    :param given_word:
+    :param guess_dist:
     :param wins:
+    :return: prompt if it is valid
     """
     prompt = input(letter_status(match, mismatch) + Fore.WHITE + "\nEnter your guess: ").lower()
     try:
@@ -171,4 +178,3 @@ def stats(games_played, wins, guess_dist):
     finally:
         print(f"Guess distribution: ", end='')
         print(guess_dist)
-
