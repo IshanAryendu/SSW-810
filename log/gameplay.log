@@ -1,0 +1,30 @@
+Selected word: limit
+User's input: {'strip', 'apple'}
+Total number of games played: 1
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 1, 3: 0, 4: 0, 5: 0, 6: 0}
+Selected word: gross
+User's input: {'strip', 'dates', 'apple', 'limit', 'rates'}
+Total number of games played: 2
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 1, 3: 1, 4: 0, 5: 0, 6: 0}
+Selected word: kenya
+User's input: {'strip', 'loves', 'slide', 'rides', 'dates', 'italy', 'drive', 'apple', 'limit', 'lives', 'rates'}
+Total number of games played: 3
+Win percentage: 66.66666666666666
+Guess distribution: {1: 0, 2: 1, 3: 1, 4: 0, 5: 0, 6: 0}
+Selected word: spent
+User's input: {'strip', 'loves', 'slide', 'rides', 'dates', 'italy', 'kenya', 'drive', 'apple', 'limit', 'lives', 'rates'}
+Total number of games played: 4
+Win percentage: 75.0
+Guess distribution: {1: 1, 2: 1, 3: 1, 4: 0, 5: 0, 6: 0}
+Selected word: strap
+User's input: {'mouse'}
+Total number of games played: 1
+Win percentage: 100.0
+Guess distribution: {1: 1, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+Selected word: pilot
+User's input: {'italy', 'strap', 'mouse', 'dates', 'rates'}
+Total number of games played: 2
+Win percentage: 100.0
+Guess distribution: {1: 1, 2: 0, 3: 0, 4: 1, 5: 0, 6: 0}

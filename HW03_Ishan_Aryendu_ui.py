@@ -19,17 +19,40 @@ def game_over():
     print(Fore.RED + 'GAME OVER!')
 
 
-def user_input(word_length, max_tries, retries, match, mismatch):
+def user_input(WORD_LENGTH: object, MAX_TRIES: object, retries: object, match: object, mismatch: object, games_played: object, all_words: object, prev_tries: object,
+               given_word: object,
+               guess_dist: object,
+               wins: object) -> object:
     """
     take the user input
+    :param WORD_LENGTH:
+    :param MAX_TRIES:
+    :param retries:
+    :param mismatch:
+    :param games_played:
+    :param all_words:
+    :param prev_tries:
+    :param given_word:
+    :param guess_dist:
+    :param wins:
+    :return: prompt if it is valid
     """
     prompt = input(letter_status(match, mismatch) + Fore.WHITE + "\nEnter your guess: ").lower()
-    if prompt == "":
-        return prompt
-    elif HW03_Ishan_Aryendu_wordle.valid_input(prompt, word_length):
-        return prompt
+    try:
+        if prompt == "":
+            # print("UI func called")
+            return "quit"
+        elif HW03_Ishan_Aryendu_wordle.valid_input(prompt, WORD_LENGTH):
+            return prompt
+    except ValueError:
+        print("Please provide a proper Value! ")
+        HW03_Ishan_Aryendu_wordle.play(MAX_TRIES, WORD_LENGTH, match, mismatch, games_played, all_words, prev_tries, given_word, retries,
+             guess_dist, wins)
+    except TypeError:
+        print("Please provide a proper Type! ")
+        HW03_Ishan_Aryendu_wordle.play()
     else:
-        print('\n' + Fore.WHITE + f'Chances left: {max_tries - retries}')
+        print('\n' + Fore.WHITE + f'Chances left: {MAX_TRIES - retries}')
         return None
 
 
@@ -148,7 +171,10 @@ def stats(games_played, wins, guess_dist):
     display the game statistics (number of games played, win percentage, and the guess distribution)
     """
     print(f"Total number of games played: {games_played}")
-    print(f"Win percentage: {(wins/games_played) * 100}")
-    print(f"Guess distribution: ", end='')
-    print(guess_dist)
-
+    try:
+        print(f"Win percentage: {(wins/games_played) * 100}")
+    except TypeError:
+        print(f"Win percentage: {(0/games_played) * 100}")
+    finally:
+        print(f"Guess distribution: ", end='')
+        print(guess_dist)

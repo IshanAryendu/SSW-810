@@ -1,0 +1,35 @@
+Selected word: round
+User's input: set()
+Total number of games played: 1
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0}
+Selected word: bryan
+User's input: set()
+Total number of games played: 2
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 0, 3: 1, 4: 0, 5: 1, 6: 0}
+Selected word: tests
+User's input: set()
+Total number of games played: 3
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 0, 3: 2, 4: 0, 5: 1, 6: 0}
+Selected word: tests
+User's input: set()
+Total number of games played: 3
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 0, 3: 2, 4: 0, 5: 1, 6: 0}
+Selected word: tests
+User's input: input_word
+Total number of games played: 1
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+Selected word: tests
+User's input: input_word
+Total number of games played: 1
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+Selected word: tests
+User's input: input_word
+Total number of games played: 1
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}

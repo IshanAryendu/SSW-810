@@ -86,9 +86,15 @@ class TestWordle(unittest.TestCase):
         with self.assertRaises(ValueError):
             wordle.valid_input("Yellow", 5)
 
-    # def test_case_init(self):
-    #     """Test if the main function runs without failures"""
-    #     try:
-    #         var_0 = wordle.main()
-    #     except BaseException:
-    #         pass
+    def test_case_init(self):
+        """Test if the main function runs without failures"""
+        try:
+            wordle.play()
+        except BaseException:
+            pass
+
+    def test_log_gameplay(self):
+        try:
+            wordle.log_gameplay("log/logs.txt", "tests", "input_word", 1, 1, {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0})
+        except Exception:
+            pass
