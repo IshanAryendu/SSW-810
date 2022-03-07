@@ -28,3 +28,88 @@ User's input: {'italy', 'strap', 'mouse', 'dates', 'rates'}
 Total number of games played: 2
 Win percentage: 100.0
 Guess distribution: {1: 1, 2: 0, 3: 0, 4: 1, 5: 0, 6: 0}
+Selected word: grant
+User's input: {'apple', 'fibre'}
+Total number of games played: 1
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 1, 3: 0, 4: 0, 5: 0, 6: 0}
+Selected word: fault
+User's input: {'rates', 'dates', 'fibre', 'grant', 'apple'}
+Total number of games played: 2
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 1, 3: 1, 4: 0, 5: 0, 6: 0}
+Selected word: level
+User's input: {'rates', 'dates', 'fibre', 'fault', 'grant', 'apple'}
+Total number of games played: 3
+Win percentage: 100.0
+Guess distribution: {1: 1, 2: 1, 3: 1, 4: 0, 5: 0, 6: 0}
+Selected word: sally
+User's input: {'kenya'}
+Total number of games played: 1
+Win percentage: 100.0
+Guess distribution: {1: 1, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+Selected word: cubic
+User's input: {'apple', 'kenya', 'sally'}
+Total number of games played: 2
+Win percentage: 100.0
+Guess distribution: {1: 1, 2: 1, 3: 0, 4: 0, 5: 0, 6: 0}
+Selected word: hobby
+User's input: {'apple', 'focal'}
+Total number of games played: 1
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 1, 3: 0, 4: 0, 5: 0, 6: 0}
+Selected word: files
+User's input: {'apple', 'hobby', 'focal'}
+Total number of games played: 2
+Win percentage: 100.0
+Guess distribution: {1: 1, 2: 1, 3: 0, 4: 0, 5: 0, 6: 0}
+Selected word: lucky
+User's input: {'dates', 'apple', 'hobby', 'focal', 'files', 'rates'}
+Total number of games played: 3
+Win percentage: 100.0
+Guess distribution: {1: 1, 2: 1, 3: 1, 4: 0, 5: 0, 6: 0}
+Selected word: shift
+User's input: {'lucky', 'dates', 'loves', 'apple', 'hobby', 'focal', 'files', 'rates'}
+Total number of games played: 4
+Win percentage: 100.0
+Guess distribution: {1: 1, 2: 2, 3: 1, 4: 0, 5: 0, 6: 0}
+Selected word: knock
+User's input: {'lucky', 'dates', 'loves', 'apple', 'shift', 'hobby', 'focal', 'files', 'rates'}
+Total number of games played: 5
+Win percentage: 100.0
+Guess distribution: {1: 2, 2: 2, 3: 1, 4: 0, 5: 0, 6: 0}
+Selected word: finds
+User's input: {'lucky', 'dates', 'loves', 'apple', 'shift', 'clock', 'knock', 'hobby', 'focal', 'files', 'rates'}
+Total number of games played: 6
+Win percentage: 100.0
+Guess distribution: {1: 2, 2: 3, 3: 1, 4: 0, 5: 0, 6: 0}
+Selected word: coast
+User's input: {'start', 'dates'}
+Total number of games played: 1
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 1, 3: 0, 4: 0, 5: 0, 6: 0}
+Selected word: packs
+User's input: {'start', 'lists', 'dates', 'coast'}
+Total number of games played: 2
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 2, 3: 0, 4: 0, 5: 0, 6: 0}
+Selected word: china
+User's input: {'packs', 'costs', 'coast', 'lists', 'dates', 'start'}
+Total number of games played: 3
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 3, 3: 0, 4: 0, 5: 0, 6: 0}
+Selected word: specs
+User's input: {'packs', 'costs', 'apple', 'coast', 'lists', 'dates', 'start', 'china'}
+Total number of games played: 4
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 4, 3: 0, 4: 0, 5: 0, 6: 0}
+Selected word: rebel
+User's input: {'likes', 'specs', 'packs', 'costs', 'apple', 'coast', 'lists', 'dates', 'start', 'speak', 'china'}
+Total number of games played: 5
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 4, 3: 1, 4: 0, 5: 0, 6: 0}
+Selected word: metro
+User's input: {'likes', 'specs', 'packs', 'costs', 'apple', 'rebel', 'coast', 'lists', 'dates', 'start', 'speak', 'roles', 'china'}
+Total number of games played: 6
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 5, 3: 1, 4: 0, 5: 0, 6: 0}
