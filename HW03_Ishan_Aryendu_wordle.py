@@ -13,6 +13,7 @@ Note: install colorama before running the code with: pip install colorama
 from random import choice
 from HW03_Ishan_Aryendu_dictionary import *
 from colorama import Fore
+from count_occurrence_stats import calculate_stats
 
 import re
 import sys
@@ -95,6 +96,7 @@ def main(flag=None, given_word=None, match=None, mismatch=None, prev_tries=None,
         # debugging
         print(Fore.WHITE + '\nThe selected word is', given_word)
         log_gameplay(LOG_FILE_PATH, given_word, prev_tries, games_played, wins, guess_dist)
+        calculate_stats(prev_tries)
         # check for termination of the program
         if retries == MAX_TRIES and not flag:
             game_over()

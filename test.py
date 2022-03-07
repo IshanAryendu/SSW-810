@@ -13,6 +13,7 @@ import unittest
 import HW03_Ishan_Aryendu_wordle as wordle
 import HW03_Ishan_Aryendu_ui as ui
 import HW03_Ishan_Aryendu_dictionary as dictionary
+import count_occurrence_stats as stat
 
 
 class TestFileReader(unittest.TestCase):
@@ -97,4 +98,64 @@ class TestWordle(unittest.TestCase):
         try:
             wordle.log_gameplay("log/logs.txt", "tests", "input_word", 1, 1, {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0})
         except Exception:
+            pass
+
+
+class TestCountOccurStat(unittest.TestCase):
+    def test_parse_file_as_dict_of_tuples_01(self):
+        try:
+            stat.parse_file_as_dict_of_tuples('log/test.csv')
+        except Exception:
+            pass
+
+    def test_covert_to_tuple(self):
+        str_0 = 'abcd'
+        str_1 = '12ab34cd'
+        dict_0 = {str_0: str_1, str_0: str_0, str_0: str_1, str_1: str_0}
+        var_0 = stat.covert_to_tuple(str_0, dict_0)
+        assert var_0 is None
+
+    def test_convert(self):
+        str_0 = 'test'
+        var_0 = stat.convert(str_0)
+        assert var_0 == ('t', 'e', 's', 't')
+
+    def test_calculate_stats(self):
+        try:
+            list_0 = []
+            object_0 = stat.calculate_stats(list_0)
+        except BaseException:
+            pass
+
+    def test_write_perc_01(self):
+        try:
+            str_0 = '\n UPf'
+            dict_0 = {str_0: str_0, str_0: str_0, str_0: str_0, str_0: str_0}
+            var_0 = stat.write_perc(str_0, dict_0)
+            assert var_0 is None
+            object_0 = stat.parse_file_as_dict_of_tuples(str_0)
+        except BaseException:
+            pass
+
+    def test_covert_to_tuple(self):
+        try:
+            str_0 = "~`'{\tzp9!,\x0b8t@$GEwx"
+            dict_0 = None
+            var_0 = stat.covert_to_tuple(str_0, dict_0)
+        except BaseException:
+            pass
+
+    def test_parse_file_as_dict_of_tuples_02(self):
+        try:
+            str_0 = '3+gXeT7A8yQSuisp'
+            object_0 = stat.parse_file_as_dict_of_tuples(str_0)
+        except BaseException:
+            pass
+
+    def test_write_perc_02(self):
+        try:
+            str_0 = "-No-b4j9%#fb1'"
+            dict_0 = None
+            var_0 = stat.write_perc(str_0, dict_0)
+        except BaseException:
             pass
