@@ -6,7 +6,6 @@
 # "letterFrequency.csv" file such that each row is "letter, first_pos_%, second_pos_%, third_pos_%, fourth_pos_%,
 # fifth_pos_%" without % sign.
 import csv
-
 import pandas as pd
 import numpy as np
 
@@ -37,7 +36,6 @@ def make_list_count_dict(words: list, no_of_words: int) -> dict:
                 all_freq[i] = default_list.copy()
                 all_freq[i][pos] = 1 / no_of_words
             pos += 1
-
     # printing result
     # print("Count of all characters is :\n "
     #       + str(all_freq))
@@ -45,7 +43,7 @@ def make_list_count_dict(words: list, no_of_words: int) -> dict:
     return all_freq
 
 
-def write_stats(test_list: list, my_dict: dict):
+def write_stats(test_list: list, my_dict: dict) -> object:
     with open("log/statistics.csv", 'w') as f:
         for word in test_list:
             pos = 0
@@ -57,7 +55,7 @@ def write_stats(test_list: list, my_dict: dict):
     f.close()
 
 
-def write_perc(FREQ_FILE_PATH: str, my_dict: dict):
+def write_perc(FREQ_FILE_PATH: str, my_dict: dict) -> object:
     with open(FREQ_FILE_PATH, 'w') as f:
         for key in my_dict.keys():
             f.write("%s, " % key)
@@ -68,11 +66,16 @@ def write_perc(FREQ_FILE_PATH: str, my_dict: dict):
     f.close()
 
 
-def convert(list):
-    return tuple(list)
+def convert(lst: list) -> tuple:
+    """
+    convert list into a tuple
+    :param list: a list of integers
+    :return: tuple of integers
+    """
+    return tuple(lst)
 
 
-def covert_to_tuple(FREQ_FILE_PATH: str, my_dict: dict):
+def covert_to_tuple(FREQ_FILE_PATH: str, my_dict: dict) -> object:
     with open(FREQ_FILE_PATH, 'w') as f:
         for key in my_dict.keys():
             f.write("%s, %s,\n" % (key, convert(my_dict[key])))
@@ -100,4 +103,4 @@ def calculate_stats(inp_list: list) -> object:
     sorted_csv.index.name = "rank"
     sorted_csv.to_csv("resource/wordRank.csv", encoding='utf-8')
     sortedlist = sorted_csv.values.tolist()
-    print(sortedlist)
+    # print(sortedlist)
