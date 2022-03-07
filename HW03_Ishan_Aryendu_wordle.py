@@ -13,7 +13,7 @@ Note: install colorama before running the code with: pip install colorama
 from random import choice
 from HW03_Ishan_Aryendu_dictionary import *
 from colorama import Fore
-from cout_occurrence_stats import calculate_stats
+from count_occurrence_stats import calculate_stats
 
 import re
 import sys

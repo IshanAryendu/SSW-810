@@ -33,3 +33,8 @@ User's input: input_word
 Total number of games played: 1
 Win percentage: 100.0
 Guess distribution: {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+Selected word: tests
+User's input: input_word
+Total number of games played: 1
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
