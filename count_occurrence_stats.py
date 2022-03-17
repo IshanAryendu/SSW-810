@@ -10,97 +10,104 @@ import pandas as pd
 import numpy as np
 
 
-# parse the statistics file into a dictionary of tuples
-def parse_file_as_dict_of_tuples(FILE_PATH: str) -> object:
-    dictionary = {}
-    with open(FILE_PATH, "r") as f:
-        reader = csv.reader(f)
-        next(reader)  # skip header
-        for line in reader:
-            dictionary[tuple(map(str, line[0].replace(',', '')))] = tuple(line[1:-1])
+class Stats:
+    def __init__(self):
+        self.FILE_PATH = None
+        FILE_PATH = ""
+        self.words = []
+        self.no_of_words = 0
+        self.test_list = []
 
-    # print(dictionary)
+    def __str__(self):
+        print(f"{self}: Counting game statistics...")
 
-# parse_file_as_dict_of_tuples("log/letterFrequency.csv")
+    def set_file_path(self, file_path):
+        self.FILE_PATH = file_path
 
+    def get_file_path(self):
+        return self.FILE_PATH
 
-def make_list_count_dict(words: list, no_of_words: int) -> dict:
-    default_list = [0, 0, 0, 0, 0]
-    all_freq = {}
-    for word in words:
-        pos = 0
-        for i in word:
-            if i in all_freq:
-                all_freq[i][pos] += 1 / no_of_words
-            else:
-                all_freq[i] = default_list.copy()
-                all_freq[i][pos] = 1 / no_of_words
-            pos += 1
-    # printing result
-    # print("Count of all characters is :\n "
-    #       + str(all_freq))
-    # print(type(all_freq))
-    return all_freq
+    def parse_file_as_dict_of_tuples(self, FILE_PATH: str):
+        dictionary = {}
+        with open(FILE_PATH, "r") as f:
+            reader = csv.reader(f)
+            next(reader)  # skip header
+            for line in reader:
+                dictionary[tuple(map(str, line[0].replace(',', '')))] = tuple(line[1:-1])
 
-
-def write_stats(test_list: list, my_dict: dict) -> object:
-    with open("log/statistics.csv", 'w') as f:
-        for word in test_list:
+    def make_list_count_dict(self, words: list, no_of_words: int) -> dict:
+        all_freq = {}
+        default_list = [0, 0, 0, 0, 0]
+        for word in words:
             pos = 0
-            prob = 1
-            for i in range(5):
-                prob = prob * (my_dict[word[pos]][pos])
+            for i in word:
+                if i in all_freq:
+                    all_freq[i][pos] += 1 / no_of_words
+                else:
+                    all_freq[i] = default_list.copy()
+                    all_freq[i][pos] = 1 / no_of_words
                 pos += 1
-            f.write("%s, %s\n" % (word, prob))
-    f.close()
+        # printing result
+        # print("Count of all characters is :\n "
+        #       + str(all_freq))
+        # print(type(all_freq))
+        return all_freq
 
+    def write_stats(self, test_list: list, my_dict: dict) -> object:
+        with open("log/statistics.csv", 'w') as f:
+            for word in test_list:
+                pos = 0
+                prob = 1
+                for i in range(5):
+                    prob = prob * (my_dict[word[pos]][pos])
+                    pos += 1
+                f.write("%s, %s\n" % (word, prob))
+        f.close()
 
-def write_perc(FREQ_FILE_PATH: str, my_dict: dict) -> object:
-    with open(FREQ_FILE_PATH, 'w') as f:
-        for key in my_dict.keys():
-            f.write("%s, " % key)
-            # f.write("%s,%s\n" % (key, my_dict[key]))
-            for entry in my_dict[key]:
-                f.write("%s, " % (entry * 100))
-            f.write("\n")
-    f.close()
+    def write_perc(self, my_dict: dict, FREQ_FILE_PATH = "log/letterFrequency.csv") -> object:
+        FREQ_FILE_PATH = "log/letterFrequency.csv"
+        with open(FREQ_FILE_PATH, 'w') as f:
+            for key in my_dict.keys():
+                f.write("%s, " % key)
+                # f.write("%s,%s\n" % (key, my_dict[key]))
+                for entry in my_dict[key]:
+                    f.write("%s, " % (entry * 100))
+                f.write("\n")
+        f.close()
 
+    def convert(self, lst: list) -> tuple:
+        """
+        convert list into a tuple
+        :param list: a list of integers
+        :return: tuple of integers
+        """
+        return tuple(lst)
 
-def convert(lst: list) -> tuple:
-    """
-    convert list into a tuple
-    :param list: a list of integers
-    :return: tuple of integers
-    """
-    return tuple(lst)
+    def covert_to_tuple(self, my_dict: dict) -> object:
+        FREQ_FILE_PATH = "log/letterFrequency.csv"
+        with open(FREQ_FILE_PATH, 'w') as f:
+            for key in my_dict.keys():
+                f.write("%s, %s,\n" % (key, self.convert(my_dict[key])))
+                # f.write()
+        f.close()
 
-
-def covert_to_tuple(FREQ_FILE_PATH: str, my_dict: dict) -> object:
-    with open(FREQ_FILE_PATH, 'w') as f:
-        for key in my_dict.keys():
-            f.write("%s, %s,\n" % (key, convert(my_dict[key])))
-            # f.write()
-    f.close()
-
-
-def calculate_stats(inp_list: list) -> object:
-    """
-    inp_list : the input list to calculate statistics
-    """
-    FREQ_FILE_PATH = "log/letterFrequency.csv"
-    no_of_words = len(inp_list)
-    letter_summary = ['word', 'probability']
-    no_of_words = len(inp_list)
-    my_dict = make_list_count_dict(inp_list, no_of_words)
-    write_stats(inp_list, my_dict)
-    write_perc(FREQ_FILE_PATH, my_dict)
-    covert_to_tuple(FREQ_FILE_PATH, my_dict)
-    file = pd.read_csv("log/statistics.csv")
-    file.to_csv("log/statistics.csv", header=letter_summary, index=False)
-    csv_file = pd.read_csv("log/statistics.csv")
-    sorted_csv = csv_file.sort_values(by=['probability'], ascending=False)
-    sorted_csv.index = np.arange(1, len(sorted_csv) + 1)
-    sorted_csv.index.name = "rank"
-    sorted_csv.to_csv("resource/wordRank.csv", encoding='utf-8')
-    sortedlist = sorted_csv.values.tolist()
-    # print(sortedlist)
+    def calculate_stats(self, inp_list: list) -> object:
+        """
+        inp_list : the input list to calculate statistics
+        """
+        no_of_words = len(inp_list)
+        letter_summary = ['word', 'probability']
+        no_of_words = len(inp_list)
+        my_dict = self.make_list_count_dict(inp_list, no_of_words)
+        self.write_stats(inp_list, my_dict)
+        self.write_perc(my_dict)
+        self.covert_to_tuple(my_dict)
+        file = pd.read_csv("log/statistics.csv")
+        file.to_csv("log/statistics.csv", header=letter_summary, index=False)
+        csv_file = pd.read_csv("log/statistics.csv")
+        sorted_csv = csv_file.sort_values(by=['probability'], ascending=False)
+        sorted_csv.index = np.arange(1, len(sorted_csv) + 1)
+        sorted_csv.index.name = "rank"
+        sorted_csv.to_csv("resource/wordRank.csv", encoding='utf-8')
+        sortedlist = sorted_csv.values.tolist()
+        # print(sortedlist)

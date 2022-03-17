@@ -1,15 +1,43 @@
-from HW03_Ishan_Aryendu_dictionary import get_words_from_file
+import HW03_Ishan_Aryendu_dictionary as d
 
 
-def add_words_to_file():
-    SRC_FILE_PATH = 'resource/word_list'
-    all_words = list(get_words_from_file(SRC_FILE_PATH, comment_char='#', word_length=5))
-    DEST_FILE_PATH = 'resource/word5.txt'
-    textfile = open(DEST_FILE_PATH, "w")
-    for element in all_words:
-        textfile.write(element + "\n")
-    textfile.close()
+class FilterWords:
+
+    def __init__(self):
+        self.SRC_FILE_PATH = 'resource/word_list'
+        self.all_words = []
+        self.DEST_FILE_PATH = 'resource/word5.txt'
+        self.dictionary = d.Dictionary()
+
+    def __str__(self):
+        print(f"The file is being read from {self.get_src_file_path()} and written onto {self.get_dest_file_path()}.")
+
+    def set_src_file_path(self, src_file_path: str):
+        self.SRC_FILE_PATH = src_file_path
+
+    def set_all_words(self, all_words: list):
+        self.all_words = all_words
+
+    def set_dest_file_path(self, dest_file_path):
+        self.DEST_FILE_PATH = dest_file_path
+
+    def get_src_file_path(self, src_file_path: str):
+        return self.SRC_FILE_PATH
+
+    def get_all_words(self, all_words: list):
+        return self.all_words
+
+    def get_dest_file_path(self, dest_file_path):
+        return self.DEST_FILE_PATH
+
+    def add_words_to_file(self):
+        all_words = list(self.dictionary.get_words_from_file(self.SRC_FILE_PATH, comment_char='#', word_length=5))
+        textfile = open(self.DEST_FILE_PATH, "w")
+        for element in all_words:
+            textfile.write(element + "\n")
+        textfile.close()
 
 
 if __name__ == '__main__':
-    add_words_to_file()
+    fw = FilterWords()
+    fw.add_words_to_file()

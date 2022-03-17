@@ -11,14 +11,13 @@ __packages__ = ['colorama', 're']
 Note: install colorama before running the code with: pip install colorama
 """
 from random import choice
-from HW03_Ishan_Aryendu_dictionary import *
+from HW03_Ishan_Aryendu_dictionary import Dictionary
 from colorama import Fore
-from count_occurrence_stats import calculate_stats
+from count_occurrence_stats import Stats
+from HW03_Ishan_Aryendu_ui import UI
 
-import re
-import sys
 
-from HW03_Ishan_Aryendu_ui import *
+ui = UI()
 
 
 def main(flag=None, given_word=None, match=None, mismatch=None, prev_tries=None, prompt=None, retries=None):
@@ -29,9 +28,10 @@ def main(flag=None, given_word=None, match=None, mismatch=None, prev_tries=None,
     MAX_TRIES = 6
     FILE_PATH = 'resource/word_list'
     LOG_FILE_PATH = 'log/gameplay.log'
-    all_words = list(get_words_from_file(FILE_PATH, word_length=WORD_LENGTH))
+    d = Dictionary()
+    all_words = list(d.get_words_from_file(FILE_PATH, word_length=WORD_LENGTH))
     max_limit = len(all_words)
-    flag, given_word, match, mismatch, prev_tries, prompt, retries = re_init(all_words, flag, given_word, match,
+    flag, given_word, match, mismatch, prev_tries, prompt, retries = ui.re_init(all_words, flag, given_word, match,
                                                                              mismatch, prev_tries, prompt, retries)
     prompt = "_____"
     games_played = 0
@@ -42,64 +42,25 @@ def main(flag=None, given_word=None, match=None, mismatch=None, prev_tries=None,
     while prompt != "":
         if prev_tries == len(all_words):
             main()
-        welcome_message(WORD_LENGTH, MAX_TRIES, games_played)
+        ui.welcome_message(WORD_LENGTH, MAX_TRIES, games_played)
         # increment the number of games played
         games_played += 1
         try:
             temp = wins
-            wins += play(MAX_TRIES, WORD_LENGTH, match, mismatch, games_played, all_words, prev_tries, given_word,
+            wins += ui.play(MAX_TRIES, WORD_LENGTH, match, mismatch, games_played, all_words, prev_tries, given_word,
                          retries, guess_dist, wins)
         except TypeError:
             wins = temp
-        # while retries != MAX_TRIES:
-        #     prompt = user_input(WORD_LENGTH, MAX_TRIES, retries, match, mismatch)
-        #     if prompt == "":
-        #         games_played -= 1
-        #         break
-        #     elif prompt not in all_words:
-        #         not_in_list()
-        #         continue
-        #     # if prompt is None or HW03_Ishan_Aryendu_ui.previously_tried(prompt, prev_tries):
-        #     #     continue
-        #     if previously_tried(prompt, prev_tries):
-        #         continue
-        #     # HW03_Ishan_Aryendu_ui.letter_status(match, mismatch)
-        #     prev_tries.add(prompt)
-        #     # given_char_dict = {}
-        #     # input_char_dict = {}
-        #     given_char_dict = create_char_dict(given_word)
-        #     # print(given_char_dict)
-        #     input_char_dict = create_char_dict(prompt)
-        #     # print(input_char_dict)
-        #     # green_dict = {}
-        #     # yellow_set = set()
-        #     # red_set = set()
-        #     for letter_of_given_word, letter_of_input_word in zip(given_word, prompt):
-        #         set_char_color(letter_of_given_word, letter_of_input_word, given_word, match,
-        #                                              mismatch, given_char_dict, input_char_dict)
-        #     # increment the counter
-        #     retries += 1
-        #
-        #     # match the words
-        #     flag = match_words(prompt, given_word, MAX_TRIES, retries)
-        #     if flag:
-        #         # update guess distribution
-        #         guess_dist[retries] += 1
-        #         flag, given_word, match, mismatch, prev_tries, prompt, retries = re_init(all_words, flag, given_word,
-        #                                                                                  match,
-        #                                                                                  mismatch, prev_tries, prompt,
-        #                                                                                  retries)
-        #         wins += 1
-        #         break
-        stats(games_played, wins, guess_dist)
+        ui.stats(games_played, wins, guess_dist)
         given_word = gen_word(all_words)
         # debugging
         print(Fore.WHITE + '\nThe selected word is', given_word)
         log_gameplay(LOG_FILE_PATH, given_word, prev_tries, games_played, wins, guess_dist)
-        calculate_stats(prev_tries)
+        s = Stats()
+        s.calculate_stats(prev_tries)
         # check for termination of the program
         if retries == MAX_TRIES and not flag:
-            game_over()
+            ui.game_over()
             break
 
 
@@ -108,24 +69,6 @@ def gen_word(all_words):
     # debugging
     print(Fore.WHITE + '\nThe selected word is', tmp_word)
     return tmp_word
-
-
-def valid_input(prompt: str, word_length: int):
-    """
-    validate the user input
-    """
-    if type(prompt) != str:
-        raise TypeError("Invalid type")
-    if len(prompt) != word_length:
-        raise ValueError("Invalid word length")
-    if len(prompt.strip()) != word_length:
-        print(Fore.RED + f"Try again with a {word_length} letter word.")
-        return False
-    elif not (bool(re.match('^[a-zA-Z]*$', prompt)) is True):
-        print(Fore.RED + "Enter a word without numbers or special characters.")
-        return False
-    else:
-        return True
 
 
 def create_char_dict(word):
@@ -139,24 +82,6 @@ def create_char_dict(word):
         else:
             char_dict[char] = 1
     return char_dict
-
-
-def re_init(all_words, flag, given_word, match, mismatch, prev_tries, prompt, retries):
-    """
-    re-initialize the variables
-    """
-    # given_word = "sooon"
-    # given_word = choice(all_words)
-    # # debugging
-    # print(Fore.WHITE + '\nThe selected word is', given_word)
-    # initialize the required variables
-    retries = 0
-    prompt = "_____"
-    flag = False
-    match = set()
-    mismatch = set()
-    prev_tries = set()
-    return flag, given_word, match, mismatch, prev_tries, prompt, retries
 
 
 def log_gameplay(log_file_loc, given_word, input_word, games_played, wins, guess_dist):
@@ -193,18 +118,18 @@ def play(MAX_TRIES, WORD_LENGTH, match, mismatch, games_played, all_words, prev_
     :return: count as 1 if everything goes without any errors
     """
     while retries != MAX_TRIES:
-        prompt = user_input(WORD_LENGTH, MAX_TRIES, retries, match, mismatch, games_played, all_words, prev_tries,
+        prompt = ui.user_input(WORD_LENGTH, MAX_TRIES, retries, match, mismatch, games_played, all_words, prev_tries,
                             given_word, guess_dist, wins)
         # print('"'+prompt+'"')
         if prompt == "quit":
-            exit_func()
+            ui.exit_func()
             break
         elif prompt not in all_words:
-            not_in_list()
+            ui.not_in_list()
             continue
         # if prompt is None or HW03_Ishan_Aryendu_ui.previously_tried(prompt, prev_tries):
         #     continue
-        if previously_tried(prompt, prev_tries):
+        if ui.previously_tried(prompt, prev_tries):
             continue
         # HW03_Ishan_Aryendu_ui.letter_status(match, mismatch)
         prev_tries.add(prompt)
@@ -218,17 +143,17 @@ def play(MAX_TRIES, WORD_LENGTH, match, mismatch, games_played, all_words, prev_
         # yellow_set = set()
         # red_set = set()
         for letter_of_given_word, letter_of_input_word in zip(given_word, prompt):
-            set_char_color(letter_of_given_word, letter_of_input_word, given_word, match,
+            ui.set_char_color(letter_of_given_word, letter_of_input_word, given_word, match,
                            mismatch, given_char_dict, input_char_dict)
         # increment the counter
         retries += 1
 
         # match the words
-        flag = match_words(prompt, given_word, MAX_TRIES, retries)
+        flag = ui.match_words(prompt, given_word, MAX_TRIES, retries)
         if flag:
             # update guess distribution
             guess_dist[retries] += 1
-            flag, given_word, match, mismatch, prev_tries, prompt, retries = re_init(all_words, flag, given_word,
+            flag, given_word, match, mismatch, prev_tries, prompt, retries = ui.re_init(all_words, flag, given_word,
                                                                                      match,
                                                                                      mismatch, prev_tries, prompt,
                                                                                      retries)
@@ -255,11 +180,6 @@ def log_gameplay(log_file_loc, given_word, input_word, games_played, wins, guess
         print(e)
     finally:
         f.close()
-
-
-def exit_func():
-    game_over()
-    sys.exit("Quitting...")
 
 
 if __name__ == '__main__':
