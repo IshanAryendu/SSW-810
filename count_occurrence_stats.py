@@ -19,7 +19,7 @@ class Stats:
         self.test_list = []
 
     def __str__(self):
-        print(f"{self}: Counting game statistics...")
+        return f"{self.FILE_PATH}: Counting game statistics..."
 
     def set_file_path(self, file_path):
         self.FILE_PATH = file_path

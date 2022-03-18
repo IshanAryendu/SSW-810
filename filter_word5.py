@@ -10,7 +10,7 @@ class FilterWords:
         self.dictionary = d.Dictionary()
 
     def __str__(self):
-        print(f"The file is being read from {self.get_src_file_path()} and written onto {self.get_dest_file_path()}.")
+        return f'The file is being read from {self.get_src_file_path()} and written onto {self.get_dest_file_path()}.'
 
     def set_src_file_path(self, src_file_path: str):
         self.SRC_FILE_PATH = src_file_path

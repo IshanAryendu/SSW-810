@@ -82,7 +82,7 @@ class UI:
 
 
     def __str__(self):
-        pass
+        return f'You have played {self.games_played} with {self.wins} wins!'
 
     def welcome_message(self, word_length, max_tries, games_played):
         """

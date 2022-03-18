@@ -26,8 +26,8 @@ class Dictionary:
         return self.word_length
 
     def __str__(self):
-        print(f"The file {self.get_file_name()} is being read with the comment char {self.get_comment_char()} for \
-         {self.get_word_length()} lettered words.")
+        return f"The file {self.get_file_name()} is being read with the comment char {self.get_comment_char()} for \
+         {self.get_word_length()} lettered words."
 
     def get_words_from_file(self, filename: str, comment_char='#', word_length=None) -> Iterator[str]:
         """
