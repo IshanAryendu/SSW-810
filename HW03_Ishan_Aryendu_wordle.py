@@ -2,7 +2,7 @@
 __author__ = "Ishan Aryendu"
 __credits__ = ["Tech With Tim (YouTube)", "geeksforgeeks.org", stackoverflow]
 __license__ = "GPL"
-__version__ = "0.1"
+__version__ = "1.0"
 __maintainer__ = "Ishan Aryendu"
 __email__ = "iaryendu@stevens.edu"
 __status__ = "Development"
