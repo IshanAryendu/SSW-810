@@ -1,5 +1,6 @@
 import unittest
 import singleLL as module_0
+import wordleSolver as module_1
 
 
 class TestSingleLL(unittest.TestCase):
@@ -38,3 +39,12 @@ class TestSingleLL(unittest.TestCase):
         assert node_1.nextval is None
         var_1 = s_linked_list_0.AtBegining(node_1)
         assert var_1 is None
+
+
+class TestWordleSolver(unittest.TestCase):
+    def test_case_0(self):
+        s = module_1.Solve()
+        llist = s.solve(True, 'smile', '?', '?')
+        lst = llist.listEle()
+        assert lst[0] == "smile"
+        assert lst[1] == "miles"

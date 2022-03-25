@@ -7,7 +7,15 @@ class SLinkedList:
    def __init__(self):
       self.headval = None
 
-# Print the linked list
+   def listEle(self):
+      res=[]
+      printval = self.headval
+      while printval is not None:
+         res.append(printval.dataval)
+         printval = printval.nextval
+      return res
+
+   # Print the linked list
    def listprint(self):
       printval = self.headval
       while printval is not None:
