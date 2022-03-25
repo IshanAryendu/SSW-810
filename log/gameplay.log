@@ -523,3 +523,8 @@ User's input: {'grass', 'tight', 'brass', 'dress', 'miami', 'right', 'audit', 'f
 Total number of games played: 3
 Win percentage: 66.66666666666666
 Guess distribution: {1: 2, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+Selected word: donna
+User's input: {'smile', 'shame', 'miles'}
+Total number of games played: 1
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0}
