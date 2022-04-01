@@ -26,6 +26,10 @@ class Wordle:
         self.games_played = 0
         self.wins = 0
         self.guess_dist = {}
+        self.mismatch = {}
+        self.match = {}
+        self.res_pattern = ""
+        self.ui = UI()
 
     def __str__(self):
         return f'The files are being logged at {self.log_file_loc}'
@@ -57,50 +61,52 @@ class Wordle:
         finally:
             f.close()
 
-
-def main(flag=None, given_word=None, match=None, mismatch=None, prev_tries=None, prompt=None, retries=None):
-    # set the default parameters
-    ui = UI()
-    wordle = Wordle()
-    WORD_LENGTH = 5
-    MAX_TRIES = 6
-    FILE_PATH = 'resource/word_list'
-    LOG_FILE_PATH = 'log/gameplay.log'
-    d = Dictionary()
-    all_words = list(d.get_words_from_file(FILE_PATH, word_length=WORD_LENGTH))
-    max_limit = len(all_words)
-    flag, given_word, match, mismatch, prev_tries, prompt, retries = ui.re_init(all_words, flag, given_word, match,
-                                                                             mismatch, prev_tries, prompt, retries)
-    prompt = "_____"
-    games_played = 0
-    wins = 0
-    guess_dist = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
-    # given_word = ""
-    given_word = wordle.gen_word(all_words)
-    while prompt != "":
-        if prev_tries == len(all_words):
-            main()
-        ui.welcome_message(WORD_LENGTH, MAX_TRIES, games_played)
-        # increment the number of games played
-        games_played += 1
-        try:
-            temp = wins
-            wins += ui.play(MAX_TRIES, WORD_LENGTH, match, mismatch, games_played, all_words, prev_tries, given_word,
-                         retries, guess_dist, wins)
-        except TypeError:
-            wins = temp
-        ui.stats(games_played, wins, guess_dist)
+    def play_wordle(self, flag=None, given_word=None, match=None, mismatch=None, prev_tries=None, prompt=None,
+                    retries=None):
+        # set the default parameters
+        wordle = Wordle()
+        WORD_LENGTH = 5
+        MAX_TRIES = 6
+        FILE_PATH = 'resource/word_list'
+        LOG_FILE_PATH = 'log/gameplay.log'
+        d = Dictionary()
+        all_words = list(d.get_words_from_file(FILE_PATH, word_length=WORD_LENGTH))
+        max_limit = len(all_words)
+        flag, given_word, self.match, self.mismatch, prev_tries, prompt, retries = self.ui.re_init(all_words, flag, given_word, match,
+                                                                                    mismatch, prev_tries, prompt,
+                                                                                    retries)
+        prompt = "_____"
+        games_played = 0
+        wins = 0
+        guess_dist = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+        # given_word = ""
         given_word = wordle.gen_word(all_words)
-        # debugging
-        print(Fore.WHITE + '\nThe selected word is', given_word)
-        wordle.log_gameplay(LOG_FILE_PATH, given_word, prev_tries, games_played, wins, guess_dist)
-        s = Stats()
-        s.calculate_stats(prev_tries)
-        # check for termination of the program
-        if retries == MAX_TRIES and not flag:
-            ui.game_over()
-            break
+        while prompt != "":
+            if prev_tries == len(all_words):
+                self.play_wordle()
+            self.ui.welcome_message(WORD_LENGTH, MAX_TRIES, games_played)
+            # increment the number of games played
+            games_played += 1
+            try:
+                temp = wins
+                wins += self.ui.play(MAX_TRIES, WORD_LENGTH, self.match, self.mismatch, games_played, all_words, prev_tries,
+                                given_word, retries, guess_dist, wins)
+                # self.res_pattern = self.ui.res_pattern
+            except TypeError:
+                wins = temp
+            self.ui.stats(games_played, wins, guess_dist)
+            given_word = wordle.gen_word(all_words)
+            # debugging
+            print(Fore.WHITE + '\nThe selected word is', given_word)
+            wordle.log_gameplay(LOG_FILE_PATH, given_word, prev_tries, games_played, wins, guess_dist)
+            s = Stats()
+            s.calculate_stats(prev_tries)
+            # check for termination of the program
+            if retries == MAX_TRIES and not flag:
+                self.ui.game_over()
+                break
 
 
 if __name__ == '__main__':
-    main()
+    w = Wordle()
+    w.play_wordle()

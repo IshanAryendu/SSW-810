@@ -19,6 +19,7 @@ class UI:
         self.given_word = ""
         self.guess_dist = {}
         self.wins = 0
+        self.res_pattern = ""
 
     def set_word_length(self, word_length):
         self.WORD_LENGTH = word_length
@@ -215,6 +216,7 @@ class UI:
                 continue
             # HW03_Ishan_Aryendu_ui.letter_status(match, mismatch)
             prev_tries.add(prompt)
+            File_object = open(r"log/pattern.txt", "w")
             # given_char_dict = {}
             # input_char_dict = {}
             given_char_dict = self.create_char_dict(given_word)
@@ -224,11 +226,14 @@ class UI:
             # green_dict = {}
             # yellow_set = set()
             # red_set = set()
+            self.res_pattern = ""
             for letter_of_given_word, letter_of_input_word in zip(given_word, prompt):
                 self.set_char_color(letter_of_given_word, letter_of_input_word, given_word, match,
                                mismatch, given_char_dict, input_char_dict)
             # increment the counter
             retries += 1
+            # print(self.res_pattern)
+            File_object.write(self.res_pattern)
 
             # match the words
             flag = self.match_words(prompt, given_word, MAX_TRIES, retries)
@@ -284,10 +289,10 @@ class UI:
         # letter_color, letter = (Fore.GREEN, letter_of_given_word + ', ') if letter_of_given_word == letter_of_input_word \
         #     else (Fore.YELLOW, '`, ') if letter_of_input_word in given_word \
         #     else (Fore.RED, '", ')
-
         if letter_of_given_word == letter_of_input_word:
             letter_color, letter = (Fore.GREEN, letter_of_given_word + ', ')
             match.add(letter_of_input_word)
+            self.res_pattern+=letter_of_given_word
             # Decrement Dictionary value by 1
             given_char_dict[letter_of_given_word] = given_char_dict.get(letter_of_given_word, 0) - 1
             input_char_dict[letter_of_input_word] = input_char_dict.get(letter_of_input_word, 0) - 1
@@ -295,12 +300,14 @@ class UI:
                 input_char_dict[letter_of_input_word] <= given_char_dict[letter_of_input_word]:
             letter_color, letter = (Fore.YELLOW, '`, ')
             match.add(letter_of_input_word)
+            self.res_pattern+='_'
             # Decrement Dictionary value by 1
             given_char_dict[letter_of_given_word] = given_char_dict.get(letter_of_given_word, 0) - 1
             input_char_dict[letter_of_input_word] = input_char_dict.get(letter_of_input_word, 0) - 1
         else:
             letter_color, letter = (Fore.RED, '", ')
             mismatch.add(letter_of_input_word)
+            self.res_pattern += '_'
         # print(char_dict)
         # if letter_of_input_word in given_word:
         #     match.add(letter_of_input_word)
