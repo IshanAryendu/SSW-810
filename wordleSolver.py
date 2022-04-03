@@ -12,9 +12,10 @@ class Solve():
         exit()
 
     def solve(self, flag: bool, match: str = '?', mismatch: str = '?', pattern: str = '?'):
+
         dictionary = open("resource/word5.txt", "r")
         words = dictionary.readlines()
-        print("Loaded " + str(len(words)) + " words from dictionary.")
+        # print("Loaded " + str(len(words)) + " words from dictionary.")
         dictionary.close()
         max = 51
 
@@ -49,21 +50,25 @@ class Solve():
         regex_pattern = "^" + regex + "$"
         pattern = re.compile(regex_pattern)
 
-        llist = SLinkedList()
+        # llist = SLinkedList()
+        lst = []
 
         for word in solutions:
             if pattern.match(word):
                 if flag:
                     max -= 1
                     if max == 0:
-                        return llist
+                        # return llist
+                        return lst
                 # print(word)
-                llist.AtBegining(word)
+                # llist.AtBegining(word)
+                lst.append(word)
 
-        return llist
-
+        # return llist
+        return lst
 
 if __name__ == '__main__':
     s = Solve()
     llist = s.solve(True, 'smile', '?', '?')
+    llist.return_first()
     llist.listprint()
