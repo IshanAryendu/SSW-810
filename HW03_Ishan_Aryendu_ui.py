@@ -3,6 +3,7 @@
 """
 from io import StringIO
 from colorama import Fore
+from wordleSolver import Solve
 import re
 import sys
 
@@ -12,6 +13,7 @@ class UI:
         self.WORD_LENGTH = 5
         self.MAX_TRIES = 6
         self.retries = 0
+        self.match = {}
         self.mismatch = {}
         self.games_played = 0
         self.all_words = []
@@ -19,6 +21,7 @@ class UI:
         self.given_word = ""
         self.guess_dist = {}
         self.wins = 0
+        self.res_pattern = ""
 
     def set_word_length(self, word_length):
         self.WORD_LENGTH = word_length
@@ -215,6 +218,7 @@ class UI:
                 continue
             # HW03_Ishan_Aryendu_ui.letter_status(match, mismatch)
             prev_tries.add(prompt)
+            File_object = open(r"log/pattern.txt", "w")
             # given_char_dict = {}
             # input_char_dict = {}
             given_char_dict = self.create_char_dict(given_word)
@@ -224,11 +228,14 @@ class UI:
             # green_dict = {}
             # yellow_set = set()
             # red_set = set()
+            self.res_pattern = ""
             for letter_of_given_word, letter_of_input_word in zip(given_word, prompt):
                 self.set_char_color(letter_of_given_word, letter_of_input_word, given_word, match,
                                mismatch, given_char_dict, input_char_dict)
             # increment the counter
             retries += 1
+            # print(self.res_pattern)
+            File_object.write(self.res_pattern)
 
             # match the words
             flag = self.match_words(prompt, given_word, MAX_TRIES, retries)
@@ -241,6 +248,52 @@ class UI:
                                                                                          retries)
                 # wins += 1
                 return 1
+
+    def auto_play(self, prompt, MAX_TRIES, WORD_LENGTH, match, mismatch, games_played, all_words, prev_tries, given_word, retries,
+             guess_dist, wins, ui):
+            if prompt == "quit":
+                self.exit_func()
+                return
+            elif prompt not in all_words:
+                self.not_in_list()
+                self.auto_play(prompt, MAX_TRIES, WORD_LENGTH, match, mismatch, games_played, all_words, prev_tries,
+                          given_word, retries,
+                          guess_dist, wins)
+            if self.previously_tried(prompt, prev_tries):
+                self.auto_play(prompt, MAX_TRIES, WORD_LENGTH, match, mismatch, games_played, all_words, prev_tries,
+                               given_word, retries,
+                               guess_dist, wins, ui)
+            prev_tries.add(prompt)
+            File_object = open(r"log/pattern.txt", "w")
+            given_char_dict = self.create_char_dict(given_word)
+            input_char_dict = self.create_char_dict(prompt)
+            self.res_pattern = ""
+            for letter_of_given_word, letter_of_input_word in zip(given_word, prompt):
+                self.set_char_color(letter_of_given_word, letter_of_input_word, given_word, match,
+                                    mismatch, given_char_dict, input_char_dict)
+            # increment the counter
+            retries += 1
+            print("\nPattern in UI: " + self.res_pattern)
+            # ref.set_pattern(self.res_pattern)
+            # print("\nPattern in UI ref: " + ref.get_pattern())
+            ui.res_pattern = self.res_pattern
+            File_object.write(self.res_pattern)
+
+            # match the words
+            flag = self.match_words(prompt, given_word, MAX_TRIES, retries)
+            if flag:
+                # update guess distribution
+                guess_dist[retries] += 1
+                flag, given_word, match, mismatch, prev_tries, prompt, retries = self.re_init(all_words, flag,
+                                                                                              given_word,
+                                                                                              match,
+                                                                                              mismatch, prev_tries,
+                                                                                              prompt,
+                                                                                              retries)
+                # wins += 1
+                return 1
+            else:
+                return "continue"
 
     # def valid_input(prompt: str, word_length: int):
     #     """
@@ -284,10 +337,10 @@ class UI:
         # letter_color, letter = (Fore.GREEN, letter_of_given_word + ', ') if letter_of_given_word == letter_of_input_word \
         #     else (Fore.YELLOW, '`, ') if letter_of_input_word in given_word \
         #     else (Fore.RED, '", ')
-
         if letter_of_given_word == letter_of_input_word:
             letter_color, letter = (Fore.GREEN, letter_of_given_word + ', ')
             match.add(letter_of_input_word)
+            self.res_pattern+=letter_of_given_word
             # Decrement Dictionary value by 1
             given_char_dict[letter_of_given_word] = given_char_dict.get(letter_of_given_word, 0) - 1
             input_char_dict[letter_of_input_word] = input_char_dict.get(letter_of_input_word, 0) - 1
@@ -295,12 +348,14 @@ class UI:
                 input_char_dict[letter_of_input_word] <= given_char_dict[letter_of_input_word]:
             letter_color, letter = (Fore.YELLOW, '`, ')
             match.add(letter_of_input_word)
+            self.res_pattern+='_'
             # Decrement Dictionary value by 1
             given_char_dict[letter_of_given_word] = given_char_dict.get(letter_of_given_word, 0) - 1
             input_char_dict[letter_of_input_word] = input_char_dict.get(letter_of_input_word, 0) - 1
         else:
             letter_color, letter = (Fore.RED, '", ')
             mismatch.add(letter_of_input_word)
+            self.res_pattern += '_'
         # print(char_dict)
         # if letter_of_input_word in given_word:
         #     match.add(letter_of_input_word)
