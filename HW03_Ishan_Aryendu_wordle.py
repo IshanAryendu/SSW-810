@@ -15,6 +15,7 @@ from HW03_Ishan_Aryendu_dictionary import Dictionary
 from colorama import Fore
 from count_occurrence_stats import Stats
 from HW03_Ishan_Aryendu_ui import UI
+from reference import Ref
 
 
 class Wordle:
@@ -72,15 +73,17 @@ class Wordle:
         d = Dictionary()
         all_words = list(d.get_words_from_file(FILE_PATH, word_length=WORD_LENGTH))
         max_limit = len(all_words)
-        flag, given_word, self.match, self.mismatch, prev_tries, prompt, retries = self.ui.re_init(all_words, flag, given_word, match,
-                                                                                    mismatch, prev_tries, prompt,
-                                                                                    retries)
+        flag, given_word, self.match, self.mismatch, prev_tries, prompt, retries = self.ui.re_init(all_words, flag,
+                                                                                    given_word, match, mismatch,
+                                                                                    prev_tries, prompt, retries)
         prompt = "_____"
         games_played = 0
         wins = 0
         guess_dist = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
         # given_word = ""
         given_word = wordle.gen_word(all_words)
+        ref = Ref()
+        ref.set_value = given_word
         while prompt != "":
             if prev_tries == len(all_words):
                 self.play_wordle()
@@ -105,7 +108,6 @@ class Wordle:
             if retries == MAX_TRIES and not flag:
                 self.ui.game_over()
                 break
-
 
 if __name__ == '__main__':
     w = Wordle()

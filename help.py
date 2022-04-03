@@ -39,6 +39,27 @@ class Help():
             match = self.get_match_char_list(match_file_path)
         return flag, match, mismatch, pattern
 
+    def help_my_autoplay(self, match='?', mismatch='?', pattern='?'):
+        flag = False
+        match_file_path = 'log/letterFrequency.csv'
+        match = self.get_match_char_list(match_file_path)
+        print("Starting autoplay module...")
+        if not mismatch:
+            mismatch = '?'
+        if not pattern:
+            pattern = '?'
+        if not match:
+            flag = True
+            match = self.get_match_char_list(match_file_path)
+        allowed = set(string.ascii_lowercase + '?')
+        # if not set(sys.argv[1] + sys.argv[2]) <= allowed:
+        if not set(match + mismatch) <= allowed:
+            print(
+                "The first and second arguments should either be lowercase letters, or a single question mark (?) as a "
+                "placeholder")
+            match = self.get_match_char_list(match_file_path)
+        return flag, pattern
+
 
 if __name__ == '__main__':
     h = Help()

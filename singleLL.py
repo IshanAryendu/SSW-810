@@ -22,6 +22,11 @@ class SLinkedList:
          print (printval.dataval)
          printval = printval.nextval
 
+   # Print the linked list
+   def return_first(self):
+      printval = self.headval
+      return printval.dataval
+
    def AtBegining(self,newdata):
       NewNode = Node(newdata)
       # Update the new nodes next val to existing node
