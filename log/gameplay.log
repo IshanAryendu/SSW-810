@@ -58593,3 +58593,28 @@ User's input: {'honda', 'allen', 'diana'}
 Total number of games played: 1
 Win percentage: 100.0
 Guess distribution: {1: 1, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+Selected word: kevin
+User's input: {'canon', 'shots', 'ghost'}
+Total number of games played: 1
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0}
+Selected word: whats
+User's input: {'snake', 'lists', 'derek'}
+Total number of games played: 1
+Win percentage: 100.0
+Guess distribution: {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0}
+Selected word: burst
+User's input: {'snake', 'trace', 'cindy', 'lists', 'sandy', 'apple', 'candy', 'derek', 'items'}
+Total number of games played: 2
+Win percentage: 50.0
+Guess distribution: {1: 0, 2: 0, 3: 1, 4: 0, 5: 0, 6: 0}
+Selected word: rugby
+User's input: {'kenny', 'token', 'taken', 'snake'}
+Total number of games played: 1
+Win percentage: 100.0
+Guess distribution: {1: 1, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+Selected word: fixed
+User's input: {'spine', 'slave', 'setup', 'spies', 'sheep', 'snake', 'shine', 'sleep', 'solve'}
+Total number of games played: 1
+Win percentage: 100.0
+Guess distribution: {1: 1, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}

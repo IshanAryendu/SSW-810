@@ -1,9 +1,21 @@
+"""
+__author__ = "Ishan Aryendu"
+__credits__ = ["Tech With Tim (YouTube)", "geeksforgeeks.org", stackoverflow]
+__license__ = "GPL"
+__version__ = "1.0"
+__maintainer__ = "Ishan Aryendu"
+__email__ = "iaryendu@stevens.edu"
+__status__ = "Development"
+
+"""
+
 from wordleSolver import Solve
 import string
 
 
 class Help():
-    def get_match_char_list(self, file_path):
+    def get_match_char_list(self, file_path: str) -> str:
+        """Get the list of most likely characters"""
         _file = open(file_path, 'r')
         counter = 5
         res_string = ''
@@ -16,6 +28,7 @@ class Help():
         return res_string
 
     def help_me(self):
+        """Gives flag, match, mismatch, pattern for the susequent steps"""
         flag = False
         match_file_path = 'log/letterFrequency.csv'
         match = self.get_match_char_list(match_file_path)
@@ -39,7 +52,8 @@ class Help():
             match = self.get_match_char_list(match_file_path)
         return flag, match, mismatch, pattern
 
-    def help_my_autoplay(self, match='?', mismatch='?', pattern='?'):
+    def help_my_autoplay(self, match='?', mismatch='?', pattern='?') -> tuple:
+        """Gives the flag, pattern for subsequent steps"""
         flag = False
         match_file_path = 'log/letterFrequency.csv'
         match = self.get_match_char_list(match_file_path)

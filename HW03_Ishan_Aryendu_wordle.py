@@ -6,7 +6,7 @@ __version__ = "1.0"
 __maintainer__ = "Ishan Aryendu"
 __email__ = "iaryendu@stevens.edu"
 __status__ = "Development"
-__packages__ = ['colorama', 're']
+__packages__ = ['colorama', 're', 'random']
 
 Note: install colorama before running the code with: pip install colorama
 """
@@ -15,7 +15,6 @@ from HW03_Ishan_Aryendu_dictionary import Dictionary
 from colorama import Fore
 from count_occurrence_stats import Stats
 from HW03_Ishan_Aryendu_ui import UI
-from reference import Ref
 
 
 class Wordle:
@@ -82,8 +81,6 @@ class Wordle:
         guess_dist = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
         # given_word = ""
         given_word = wordle.gen_word(all_words)
-        ref = Ref()
-        ref.set_value = given_word
         while prompt != "":
             if prev_tries == len(all_words):
                 self.play_wordle()

@@ -1,3 +1,14 @@
+"""
+__author__ = "Ishan Aryendu"
+__credits__ = ["Tech With Tim (YouTube)", "geeksforgeeks.org", stackoverflow]
+__license__ = "GPL"
+__version__ = "1.0"
+__maintainer__ = "Ishan Aryendu"
+__email__ = "iaryendu@stevens.edu"
+__status__ = "Development"
+__packages__ = ['string', 're']
+
+"""
 import re
 import string
 
@@ -12,7 +23,7 @@ class Solve():
         exit()
 
     def solve(self, flag: bool, match: str = '?', mismatch: str = '?', pattern: str = '?'):
-
+        """Solve the word using list of match and unmatched characters and the pattern"""
         dictionary = open("resource/word5.txt", "r")
         words = dictionary.readlines()
         # print("Loaded " + str(len(words)) + " words from dictionary.")
@@ -66,6 +77,7 @@ class Solve():
 
         # return llist
         return lst
+
 
 if __name__ == '__main__':
     s = Solve()

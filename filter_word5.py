@@ -1,3 +1,13 @@
+"""
+__author__ = "Ishan Aryendu"
+__credits__ = ["Tech With Tim (YouTube)", "geeksforgeeks.org", stackoverflow]
+__license__ = "GPL"
+__version__ = "1.0"
+__maintainer__ = "Ishan Aryendu"
+__email__ = "iaryendu@stevens.edu"
+__status__ = "Development"
+
+"""
 import HW03_Ishan_Aryendu_dictionary as d
 
 

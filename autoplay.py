@@ -6,17 +6,14 @@ __version__ = "1.0"
 __maintainer__ = "Ishan Aryendu"
 __email__ = "iaryendu@stevens.edu"
 __status__ = "Development"
-__packages__ = ['colorama', 're']
+__packages__ = ['colorama', 're', 'random', 'string']
 
 Note: install colorama before running the code with: pip install colorama
 """
 from random import choice
-import pandas
 from HW03_Ishan_Aryendu_dictionary import Dictionary
 from colorama import Fore
-from count_occurrence_stats import Stats
 from HW03_Ishan_Aryendu_ui import UI
-# from reference import Ref
 from wordleSolver import Solve
 from help import Help
 import re
@@ -42,13 +39,18 @@ class Wordle:
         return f'The files are being logged at {self.log_file_loc}'
 
     def gen_word(self, all_words: list):
+        """
+        Generate a list of 5 lettered words
+        :param all_words: 
+        :return: 
+        """
         tmp_word = choice(all_words)
         # debugging
         print(Fore.WHITE + '\nThe selected word is', tmp_word)
         return tmp_word
 
     def log_gameplay(self, log_file_loc: str, given_word: str, input_word: str, games_played: int, wins: int,
-                     guess_dist: dict):
+                     guess_dist: dict) -> object:
         # log the gameplay
         # selected word, user input, user report
         try:
@@ -72,7 +74,7 @@ class Wordle:
         print("Second argument should be exactly 5 characters long, consisting of letters and underscores only")
         exit()
 
-    def get_match_char_list(self, file_path):
+    def get_match_char_list(self, file_path) -> str:
         _file = open(file_path, 'r')
         counter = 5
         res_string = ''
@@ -84,7 +86,7 @@ class Wordle:
             # print(line[0])
         return res_string
 
-    def solve(self, flag: bool, match: str = '?', mismatch: str = '?', pattern: str = '?'):
+    def solve(self, flag: bool, match: str = '?', mismatch: str = '?', pattern: str = '?') -> list:
         match_file_path = 'log/letterFrequency.csv'
         if not mismatch:
             mismatch = '?'
@@ -191,25 +193,13 @@ class Wordle:
                     print("Pattern: " + self.ui.res_pattern)
 
                     f, pattern = h.help_my_autoplay(self.match, pattern=self.ui.res_pattern)
-                    # # print(flag, " ", match, " ", mismatch, " ", pattern)
-                    # llist = s.solve(f, match, mismatch, pattern)
-                    # llist.listprint()
                     l = self.solve(f, self.match, self.mismatch, pattern=self.ui.res_pattern)
-                    # prompt = l[0]
-                    # print(l[0])
                     print(l)
                     print(prev_tried_words)
-                    # for word in l:
-                    #     if l in prev_tried_words:
-                    #         continue
-                    #     prev_tried_words.append(word)
-                    #     prompt = word
-                    #     break
                     prompt = choice(l)
                     while prompt in prev_tried_words:
                         prompt = choice(l)
                     print(prompt)
-                    # prompt = input("Enter your word: ")
                     prev_tried_words.append(prompt)
                     self.prev_tried_words.append(prompt)
                     inter_result = self.ui.auto_play(prompt, MAX_TRIES, WORD_LENGTH, self.match, self.mismatch,
@@ -222,25 +212,15 @@ class Wordle:
                         break
                     else:
                         wins += inter_result
-                    # wins += self.ui.play(MAX_TRIES, WORD_LENGTH, self.match, self.mismatch, games_played, all_words, prev_tries,
-                    #                 given_word, retries, guess_dist, wins)
                     self.res_pattern = self.ui.res_pattern
                     print("Wodele pattern: " + self.res_pattern)
-                    # print("Pattern: "+ref.get_pattern())
                 except TypeError:
                     wins = temp
                 self.ui.stats(games_played, wins, guess_dist)
                 NO_GAMES -= 1
                 given_word = wordle.gen_word(all_words)
                 prev_tried_words = []
-                # debugging
-                # print(Fore.WHITE + '\nThe selected word is', given_word)
                 wordle.log_gameplay(LOG_FILE_PATH, given_word, prev_tries, games_played, wins, guess_dist)
-                # s = Stats()
-                # try:
-                #     s.calculate_stats(prev_tries)
-                # except pandas.errors.EmptyDataError:
-                #     print("EXCEPTION OCCURRED")
                 # check for termination of the program
                 if retries == MAX_TRIES and not flag:
                     self.ui.game_over()

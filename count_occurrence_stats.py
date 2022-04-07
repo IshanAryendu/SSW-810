@@ -1,10 +1,14 @@
-# Add a new module and relevant methods to count occurrence statistics of each letter at a particular index from the
-# filtered dictionary. To obtain letter likelihood, you would need to count the number of times a particular letter
-# appears in a given index and divide the count by the number of dictionary words. Hint: Use a dictionary data
-# structure with each letter as the key and an initial count list of [0, 0, 0, 0, 0] where the count would be
-# incremented with each word's letters at the corresponding index. Results should be stored in the
-# "letterFrequency.csv" file such that each row is "letter, first_pos_%, second_pos_%, third_pos_%, fourth_pos_%,
-# fifth_pos_%" without % sign.
+"""
+__author__ = "Ishan Aryendu"
+__credits__ = ["Tech With Tim (YouTube)", "geeksforgeeks.org", stackoverflow]
+__license__ = "GPL"
+__version__ = "1.0"
+__maintainer__ = "Ishan Aryendu"
+__email__ = "iaryendu@stevens.edu"
+__status__ = "Development"
+__packages__ = ['colorama', 're', 'pandas', 'csv' 'numpy']
+
+"""
 import csv
 import pandas as pd
 import numpy as np
