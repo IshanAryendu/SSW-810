@@ -2,6 +2,7 @@ import re
 import string
 
 from singleLL import SLinkedList
+import sys
 
 
 class Solve():
@@ -9,7 +10,7 @@ class Solve():
     # do some checks to the user regex
     def error_msg(self):
         print("Second argument should be exactly 5 characters long, consisting of letters and underscores only")
-        exit()
+        sys.exit()
 
     def solve(self, flag: bool, match: str = '?', mismatch: str = '?', pattern: str = '?'):
 
