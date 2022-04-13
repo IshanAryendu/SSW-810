@@ -16,6 +16,7 @@ from HW03_Ishan_Aryendu_dictionary import Dictionary
 from colorama import Fore
 from count_occurrence_stats import Stats
 from HW03_Ishan_Aryendu_ui import UI
+import sys
 # from reference import Ref
 from wordleSolver import Solve
 from help import Help
@@ -70,7 +71,7 @@ class Wordle:
 
     def error_msg(self):
         print("Second argument should be exactly 5 characters long, consisting of letters and underscores only")
-        exit()
+        sys.exit()
 
     def get_match_char_list(self, file_path):
         _file = open(file_path, 'r')
