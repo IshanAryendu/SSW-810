@@ -296,7 +296,6 @@ class UI:
         """
         set the character color depending on their position
         """
-
         if letter_of_given_word == letter_of_input_word:
             letter_color, letter = (Fore.GREEN, letter_of_given_word + ', ')
             match.add(letter_of_input_word)
