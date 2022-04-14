@@ -119,35 +119,53 @@ class TestWordle(unittest.TestCase):
 class TestCountOccurStat(unittest.TestCase):
     def test_case_0(self):
         stats_0 = stat.Stats()
-        assert stats_0.FILE_PATH is None
-        assert stats_0.words == []
-        assert stats_0.no_of_words == 0
-        assert stats_0.test_list == []
+        if stats_0.FILE_PATH is not None:
+            raise AssertionError
+        if stats_0.words != []:
+            raise AssertionError
+        if stats_0.no_of_words != 0:
+            raise AssertionError
+        if stats_0.test_list != []:
+            raise AssertionError
 
     def test_case_1(self):
         stats_0 = stat.Stats()
-        assert stats_0.FILE_PATH is None
-        assert stats_0.words == []
-        assert stats_0.no_of_words == 0
-        assert stats_0.test_list == []
+        if stats_0.FILE_PATH is not None:
+            raise AssertionError
+        if stats_0.words != []:
+            raise AssertionError
+        if stats_0.no_of_words != 0:
+            raise AssertionError
+        if stats_0.test_list != []:
+            raise AssertionError
         var_0 = stats_0.__str__()
-        assert var_0 == 'None: Counting game statistics...'
+        if var_0 != 'None: Counting game statistics...':
+            raise AssertionError
 
     def test_case_2(self):
         try:
             stats_0 = stat.Stats()
-            assert stats_0.FILE_PATH is None
-            assert stats_0.words == []
-            assert stats_0.no_of_words == 0
-            assert stats_0.test_list == []
+            if stats_0.FILE_PATH is not None:
+                raise AssertionError
+            if stats_0.words != []:
+                raise AssertionError
+            if stats_0.no_of_words != 0:
+                raise AssertionError
+            if stats_0.test_list != []:
+                raise AssertionError
             stats_1 = stat.Stats()
-            assert stats_1.FILE_PATH is None
-            assert stats_1.words == []
-            assert stats_1.no_of_words == 0
-            assert stats_1.test_list == []
+            if stats_1.FILE_PATH is not None:
+                raise AssertionError
+            if stats_1.words != []:
+                raise AssertionError
+            if stats_1.no_of_words != 0:
+                raise AssertionError
+            if stats_1.test_list != []:
+                raise AssertionError
             str_0 = '5iH#dpM*oX"xN<7VU<es'
             var_0 = stats_1.set_file_path(str_0)
-            assert stats_1.FILE_PATH == '5iH#dpM*oX"xN<7VU<es'
+            if stats_1.FILE_PATH != '5iH#dpM*oX"xN<7VU<es':
+                raise AssertionError
             dict_0 = {stats_1: stats_0}
             object_0 = stats_0.covert_to_tuple(dict_0)
         except BaseException:
@@ -156,16 +174,24 @@ class TestCountOccurStat(unittest.TestCase):
     def test_case_3(self):
         try:
             stats_0 = stat.Stats()
-            assert stats_0.FILE_PATH is None
-            assert stats_0.words == []
-            assert stats_0.no_of_words == 0
-            assert stats_0.test_list == []
+            if stats_0.FILE_PATH is not None:
+                raise AssertionError
+            if stats_0.words != []:
+                raise AssertionError
+            if stats_0.no_of_words != 0:
+                raise AssertionError
+            if stats_0.test_list != []:
+                raise AssertionError
             var_0 = stats_0.get_file_path()
             stats_1 = stat.Stats()
-            assert stats_1.FILE_PATH is None
-            assert stats_1.words == []
-            assert stats_1.no_of_words == 0
-            assert stats_1.test_list == []
+            if stats_1.FILE_PATH is not None:
+                raise AssertionError
+            if stats_1.words != []:
+                raise AssertionError
+            if stats_1.no_of_words != 0:
+                raise AssertionError
+            if stats_1.test_list != []:
+                raise AssertionError
             list_0 = [var_0, var_0, stats_1]
             int_0 = 1144
             dict_0 = stats_0.make_list_count_dict(list_0, int_0)
@@ -178,10 +204,14 @@ class TestCountOccurStat(unittest.TestCase):
             list_0 = [dict_0, dict_0, dict_0, dict_0]
             int_0 = 1649
             stats_0 = stat.Stats()
-            assert stats_0.FILE_PATH is None
-            assert stats_0.words == []
-            assert stats_0.no_of_words == 0
-            assert stats_0.test_list == []
+            if stats_0.FILE_PATH is not None:
+                raise AssertionError
+            if stats_0.words != []:
+                raise AssertionError
+            if stats_0.no_of_words != 0:
+                raise AssertionError
+            if stats_0.test_list != []:
+                raise AssertionError
             tuple_0 = stats_0.convert(list_0)
             dict_1 = stats_0.make_list_count_dict(list_0, int_0)
         except BaseException:
@@ -193,10 +223,14 @@ class TestCountOccurStat(unittest.TestCase):
             list_1 = [list_0, list_0, list_0, list_0]
             list_2 = [list_0, list_0, list_0, list_1]
             stats_0 = stat.Stats()
-            assert stats_0.FILE_PATH is None
-            assert stats_0.words == []
-            assert stats_0.no_of_words == 0
-            assert stats_0.test_list == []
+            if stats_0.FILE_PATH is not None:
+                raise AssertionError
+            if stats_0.words != []:
+                raise AssertionError
+            if stats_0.no_of_words != 0:
+                raise AssertionError
+            if stats_0.test_list != []:
+                raise AssertionError
             object_0 = stats_0.calculate_stats(list_2)
         except BaseException:
             pass
@@ -206,10 +240,14 @@ class TestCountOccurStat(unittest.TestCase):
             str_0 = 'q0#9J`JGEg.n_q'
             list_0 = [str_0]
             stats_0 = stat.Stats()
-            assert stats_0.FILE_PATH is None
-            assert stats_0.words == []
-            assert stats_0.no_of_words == 0
-            assert stats_0.test_list == []
+            if stats_0.FILE_PATH is not None:
+                raise AssertionError
+            if stats_0.words != []:
+                raise AssertionError
+            if stats_0.no_of_words != 0:
+                raise AssertionError
+            if stats_0.test_list != []:
+                raise AssertionError
             object_0 = stats_0.calculate_stats(list_0)
         except BaseException:
             pass
@@ -221,10 +259,14 @@ class TestCountOccurStat(unittest.TestCase):
             list_1 = [list_0, list_0, str_0, str_0]
             int_0 = -1002
             stats_0 = stat.Stats()
-            assert stats_0.FILE_PATH is None
-            assert stats_0.words == []
-            assert stats_0.no_of_words == 0
-            assert stats_0.test_list == []
+            if stats_0.FILE_PATH is not None:
+                raise AssertionError
+            if stats_0.words != []:
+                raise AssertionError
+            if stats_0.no_of_words != 0:
+                raise AssertionError
+            if stats_0.test_list != []:
+                raise AssertionError
             dict_0 = stats_0.make_list_count_dict(list_1, int_0)
         except BaseException:
             pass
