@@ -138,7 +138,6 @@ class UI:
         prompt = input(self.letter_status(match, mismatch) + Fore.WHITE + "\nEnter your guess: ").lower()
         try:
             if prompt == "":
-                # print("UI func called")
                 return "quit"
             elif self.valid_input(prompt, WORD_LENGTH):
                 return prompt
@@ -205,36 +204,25 @@ class UI:
         while retries != MAX_TRIES:
             prompt = self.user_input(WORD_LENGTH, MAX_TRIES, retries, match, mismatch, games_played, all_words, prev_tries,
                                 given_word, guess_dist, wins)
-            # print('"'+prompt+'"')
             if prompt == "quit":
                 self.exit_func()
                 break
             elif prompt not in all_words:
                 self.not_in_list()
                 continue
-            # if prompt is None or HW03_Ishan_Aryendu_ui.previously_tried(prompt, prev_tries):
-            #     continue
             if self.previously_tried(prompt, prev_tries):
                 continue
-            # HW03_Ishan_Aryendu_ui.letter_status(match, mismatch)
             prev_tries.add(prompt)
             File_object = open(r"log/pattern.txt", "w")
-            # given_char_dict = {}
-            # input_char_dict = {}
             given_char_dict = self.create_char_dict(given_word)
             # print(given_char_dict)
             input_char_dict = self.create_char_dict(prompt)
-            # print(input_char_dict)
-            # green_dict = {}
-            # yellow_set = set()
-            # red_set = set()
             self.res_pattern = ""
             for letter_of_given_word, letter_of_input_word in zip(given_word, prompt):
                 self.set_char_color(letter_of_given_word, letter_of_input_word, given_word, match,
                                mismatch, given_char_dict, input_char_dict)
             # increment the counter
             retries += 1
-            # print(self.res_pattern)
             File_object.write(self.res_pattern)
 
             # match the words
@@ -246,7 +234,6 @@ class UI:
                                                                                          match,
                                                                                          mismatch, prev_tries, prompt,
                                                                                          retries)
-                # wins += 1
                 return 1
 
     def auto_play(self, prompt, MAX_TRIES, WORD_LENGTH, match, mismatch, games_played, all_words, prev_tries, given_word, retries,
@@ -274,8 +261,6 @@ class UI:
             # increment the counter
             retries += 1
             print("\nPattern in UI: " + self.res_pattern)
-            # ref.set_pattern(self.res_pattern)
-            # print("\nPattern in UI ref: " + ref.get_pattern())
             ui.res_pattern = self.res_pattern
             File_object.write(self.res_pattern)
 
@@ -290,23 +275,10 @@ class UI:
                                                                                               mismatch, prev_tries,
                                                                                               prompt,
                                                                                               retries)
-                # wins += 1
                 return 1
             else:
                 return "continue"
 
-    # def valid_input(prompt: str, word_length: int):
-    #     """
-    #     validate the user input
-    #     """
-    #     if len(prompt.strip()) != word_length:
-    #         print(Fore.RED + f"Try again with a {word_length} letter word.")
-    #         return False
-    #     elif not (bool(re.match('^[a-zA-Z]*$', prompt)) is True):
-    #         print(Fore.RED + "Enter a word without numbers or special characters.")
-    #         return False
-    #     else:
-    #         return True
 
     def previously_tried(self, prompt, prev_tries):
         """
@@ -318,25 +290,12 @@ class UI:
         else:
             return False
 
-    # def set_green(given_word, input_word, match, green_dict, pos):
-    #     for letter_of_given_word, letter_of_input_word in zip(given_word, input_word):
-    #         if letter_of_given_word == letter_of_input_word:
-    #             match.add(letter_of_input_word)
-    #             green_dict[pos] = letter_of_input_word
-    #     return green_dict
 
     def set_char_color(self, letter_of_given_word, letter_of_input_word, given_word, match, mismatch, given_char_dict,
                        input_char_dict):
         """
         set the character color depending on their position
         """
-        # letter_color, letter = (Fore.GREEN, letter_of_given_word) if letter_of_given_word == letter_of_input_word \
-        #     else (Fore.YELLOW, letter_of_input_word) if letter_of_input_word in given_word \
-        #     else (Fore.WHITE, 'x')
-
-        # letter_color, letter = (Fore.GREEN, letter_of_given_word + ', ') if letter_of_given_word == letter_of_input_word \
-        #     else (Fore.YELLOW, '`, ') if letter_of_input_word in given_word \
-        #     else (Fore.RED, '", ')
         if letter_of_given_word == letter_of_input_word:
             letter_color, letter = (Fore.GREEN, letter_of_given_word + ', ')
             match.add(letter_of_input_word)
@@ -356,12 +315,6 @@ class UI:
             letter_color, letter = (Fore.RED, '", ')
             mismatch.add(letter_of_input_word)
             self.res_pattern += '_'
-        # print(char_dict)
-        # if letter_of_input_word in given_word:
-        #     match.add(letter_of_input_word)
-        # else:
-        #     assert isinstance(letter_of_input_word, object)
-        #     mismatch.add(letter_of_input_word)
         print(letter_color + letter, end='')
 
     def letter_status(self, match, mismatch):
@@ -374,10 +327,6 @@ class UI:
             color = Fore.GREEN if char in match else Fore.RED if char in mismatch else Fore.WHITE
             buffer.write(color)
             buffer.write(char)
-            # if color == Fore.RED:
-            #     buffer.write("\'")
-            # elif color != Fore.GREEN:
-            #     buffer.write("\"")
             buffer.write(Fore.WHITE + ', ')
         return buffer.getvalue()
 

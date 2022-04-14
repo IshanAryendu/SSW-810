@@ -12,7 +12,6 @@ class Help():
             counter -= 1
             if not counter:
                 break
-            # print(line[0])
         return res_string
 
     def help_me(self):
@@ -65,6 +64,5 @@ if __name__ == '__main__':
     h = Help()
     s = Solve()
     flag, match, mismatch, pattern = h.help_me()
-    # print(flag, " ", match, " ", mismatch, " ", pattern)
     llist = s.solve(flag, match, mismatch, pattern)
     llist.listprint()

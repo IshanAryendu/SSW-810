@@ -17,7 +17,6 @@ from colorama import Fore
 from count_occurrence_stats import Stats
 from HW03_Ishan_Aryendu_ui import UI
 import sys
-# from reference import Ref
 from wordleSolver import Solve
 from help import Help
 import re
@@ -82,7 +81,6 @@ class Wordle:
             counter -= 1
             if not counter:
                 break
-            # print(line[0])
         return res_string
 
     def solve(self, flag: bool, match: str = '?', mismatch: str = '?', pattern: str = '?'):
@@ -96,7 +94,6 @@ class Wordle:
             match = self.get_match_char_list(match_file_path)
         dictionary = open("resource/word5.txt", "r")
         words = dictionary.readlines()
-        # print("Loaded " + str(len(words)) + " words from dictionary.")
         dictionary.close()
         max = 51
 
@@ -131,7 +128,6 @@ class Wordle:
         regex_pattern = "^" + regex + "$"
         pattern = re.compile(regex_pattern)
 
-        # llist = SLinkedList()
         lst = []
         for word in solutions:
             if pattern.match(word):
@@ -140,8 +136,6 @@ class Wordle:
                     if max == 0:
                         # return llist
                         return lst
-                # print(word)
-                # llist.AtBegining(word)
                 lst.append(word)
 
         # return llist
@@ -155,7 +149,6 @@ class Wordle:
         s = Solve()
         NO_GAMES = 1
         WORD_LENGTH = 5
-        # MAX_TRIES = 6
         MAX_TRIES = 100
         FILE_PATH = 'resource/word5.txt'
         LOG_FILE_PATH = 'log/gameplay.log'
@@ -171,15 +164,11 @@ class Wordle:
         games_played = 0
         wins = 0
         guess_dist = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
-        # given_word = ""
         given_word = wordle.gen_word(all_words)
-        # ref = Ref()
-        # ref.set_given_word(given_word)
         while prompt != "" and NO_GAMES>0:
             if prev_tries == len(all_words):
                 self.play_wordle()
             self.ui.welcome_message(WORD_LENGTH, MAX_TRIES, games_played)
-            # print("Ref Object stores: " + ref.get_given_word())
             prev_tried_words = []
             # increment the number of games played
             games_played += 1
@@ -193,24 +182,13 @@ class Wordle:
 
                     f, pattern = h.help_my_autoplay(self.match, pattern=self.ui.res_pattern)
                     # # print(flag, " ", match, " ", mismatch, " ", pattern)
-                    # llist = s.solve(f, match, mismatch, pattern)
-                    # llist.listprint()
                     l = self.solve(f, self.match, self.mismatch, pattern=self.ui.res_pattern)
-                    # prompt = l[0]
-                    # print(l[0])
                     print(l)
                     print(prev_tried_words)
-                    # for word in l:
-                    #     if l in prev_tried_words:
-                    #         continue
-                    #     prev_tried_words.append(word)
-                    #     prompt = word
-                    #     break
                     prompt = choice(l)
                     while prompt in prev_tried_words:
                         prompt = choice(l)
                     print(prompt)
-                    # prompt = input("Enter your word: ")
                     prev_tried_words.append(prompt)
                     self.prev_tried_words.append(prompt)
                     inter_result = self.ui.auto_play(prompt, MAX_TRIES, WORD_LENGTH, self.match, self.mismatch,
@@ -223,19 +201,14 @@ class Wordle:
                         break
                     else:
                         wins += inter_result
-                    # wins += self.ui.play(MAX_TRIES, WORD_LENGTH, self.match, self.mismatch, games_played, all_words, prev_tries,
-                    #                 given_word, retries, guess_dist, wins)
                     self.res_pattern = self.ui.res_pattern
                     print("Wodele pattern: " + self.res_pattern)
-                    # print("Pattern: "+ref.get_pattern())
                 except TypeError:
                     wins = temp
                 self.ui.stats(games_played, wins, guess_dist)
                 NO_GAMES -= 1
                 given_word = wordle.gen_word(all_words)
                 prev_tried_words = []
-                # debugging
-                # print(Fore.WHITE + '\nThe selected word is', given_word)
                 wordle.log_gameplay(LOG_FILE_PATH, given_word, prev_tries, games_played, wins, guess_dist)
                 # s = Stats()
                 # try:

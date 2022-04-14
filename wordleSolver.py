@@ -16,7 +16,6 @@ class Solve():
 
         dictionary = open("resource/word5.txt", "r")
         words = dictionary.readlines()
-        # print("Loaded " + str(len(words)) + " words from dictionary.")
         dictionary.close()
         max = 51
 
@@ -51,7 +50,6 @@ class Solve():
         regex_pattern = "^" + regex + "$"
         pattern = re.compile(regex_pattern)
 
-        # llist = SLinkedList()
         lst = []
 
         for word in solutions:
@@ -61,8 +59,6 @@ class Solve():
                     if max == 0:
                         # return llist
                         return lst
-                # print(word)
-                # llist.AtBegining(word)
                 lst.append(word)
 
         # return llist

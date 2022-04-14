@@ -69,7 +69,6 @@ class Stats:
         with open(FREQ_FILE_PATH, 'w') as f:
             for key in my_dict.keys():
                 f.write("%s, " % key)
-                # f.write("%s,%s\n" % (key, my_dict[key]))
                 for entry in my_dict[key]:
                     f.write("%s, " % (entry * 100))
                 f.write("\n")
@@ -88,7 +87,6 @@ class Stats:
         with open(FREQ_FILE_PATH, 'w') as f:
             for key in my_dict.keys():
                 f.write("%s, %s,\n" % (key, self.convert(my_dict[key])))
-                # f.write()
         f.close()
 
     def calculate_stats(self, inp_list: list) -> object:

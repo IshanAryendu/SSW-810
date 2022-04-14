@@ -80,7 +80,6 @@ class Wordle:
         games_played = 0
         wins = 0
         guess_dist = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
-        # given_word = ""
         given_word = wordle.gen_word(all_words)
         ref = Ref()
         ref.set_value = given_word
@@ -94,7 +93,6 @@ class Wordle:
                 temp = wins
                 wins += self.ui.play(MAX_TRIES, WORD_LENGTH, self.match, self.mismatch, games_played, all_words, prev_tries,
                                 given_word, retries, guess_dist, wins)
-                # self.res_pattern = self.ui.res_pattern
             except TypeError:
                 wins = temp
             self.ui.stats(games_played, wins, guess_dist)
