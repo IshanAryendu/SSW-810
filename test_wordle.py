@@ -66,14 +66,6 @@ class TestUI(unittest.TestCase):
         str_0 = '*8Y6Lk)H\rwhrk2;'
         u = ui.UI()
         self.assertEqual(u.create_char_dict(str_0), {'*': 1, '8': 1, 'Y': 1, '6': 1, 'L': 1, 'k': 2, ')': 1, 'H': 1, '\r': 1, 'w': 1, 'h': 1, 'r': 1, '2': 1, ';': 1})
-        # var_0 = wordle.create_char_dict(str_0)
-        # assert var_0 == {'*': 1, '8': 1, 'Y': 1, '6': 1, 'L': 1, 'k': 2, ')': 1, 'H': 1, '\r': 1, 'w': 1, 'h': 1, 'r': 1, '2': 1, ';': 1}
-        # try:
-        #     float_0 = -733.9
-        #     var_1 = wordle.create_char_dict(float_0)
-        #     self.assertEqual(var_1, ('-', '7', '3', '3', '.', '9'))
-        # except BaseException:
-        #     pass
 
 
 class TestWordle(unittest.TestCase):

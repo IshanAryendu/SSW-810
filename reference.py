@@ -5,9 +5,6 @@ class Ref():
         self.pattern = ""
         self.given_word = ""
 
-    # def __init__(self, pattern, given_wrod):
-    #     self.pattern = ""
-    #     self.given_word = ""
 
     def set_pattern(self, pattern):
         self.pattern = pattern
