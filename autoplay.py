@@ -236,7 +236,7 @@ if __name__ == '__main__':
     lm.create_user_in_word()
     lm.create_win_stats()
     lm.create_log_table()
-    for i in range(10):
+    for i in range(1000):
         wins, retries, prev_tried_words, given_word = w.play_wordle()
         # print(wins, " : ", retries, " : ", tuple(prev_tried_words))
         temp_lst = []
