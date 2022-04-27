@@ -11,6 +11,7 @@ __packages__ = ['colorama', 're']
 Note: install colorama before running the code with: pip install colorama
 """
 from random import choice
+import log_module as lm
 import pandas
 from HW03_Ishan_Aryendu_dictionary import Dictionary
 from colorama import Fore
@@ -209,6 +210,11 @@ class Wordle:
                 NO_GAMES -= 1
                 given_word = wordle.gen_word(all_words)
                 prev_tried_words = []
+                print("given word:", given_word)
+                print("prev_tries:", prev_tries)
+                print("games_played", games_played)
+                print("wins", wins)
+                print("guess_dist", guess_dist)
                 wordle.log_gameplay(LOG_FILE_PATH, given_word, prev_tries, games_played, wins, guess_dist)
                 # s = Stats()
                 # try:
@@ -216,7 +222,9 @@ class Wordle:
                 # except pandas.errors.EmptyDataError:
                 #     print("EXCEPTION OCCURRED")
                 # check for termination of the program
-                if retries == MAX_TRIES and not flag:
+                return wins, countr, prev_tries, given_word
+                if len(prev_tries) == MAX_TRIES and not flag:
+                # if retries == MAX_TRIES and not flag:
                     self.ui.game_over()
                     break
                 if NO_GAMES <= 0:
@@ -225,4 +233,30 @@ class Wordle:
 
 if __name__ == '__main__':
     w = Wordle()
-    w.play_wordle()
+    lm.create_user_in_word()
+    lm.create_win_stats()
+    lm.create_log_table()
+    for i in range(10):
+        wins, retries, prev_tried_words, given_word = w.play_wordle()
+        # print(wins, " : ", retries, " : ", tuple(prev_tried_words))
+        temp_lst = []
+        # insert prev_tried_words into the user_inp_words
+        for ind, word in enumerate(prev_tried_words):
+            if ind >=6:
+                break
+            temp_lst.append(word)
+        lm.insert_user_in_word(lm.get_word_id(), prev_tried_words=temp_lst)
+        # insert into win_stats
+        lm.insert_user_win_stats(lm.get_win_id(), retires=retries)
+        # insert into log
+        lm.insert_log(given_word=given_word)
+    inp = input("Do you want to specify a range of timestamp for search? [y/n]")
+    if inp.lower() == 'y' or inp.lower() == 'yes':
+        print("Enter the start timestamp and end timestamp in %Y-%m-%d (%H:%M:%S) format" \
+              "eg. 2022-04-27 (18:44:44)")
+        start_ts = input("start timestamp: ")
+        end_ts = input("end timestamp: ")
+        lm.select_in_range(start_ts, end_ts)
+    else:
+        lm.display_log()
+
