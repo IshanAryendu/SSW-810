@@ -238,7 +238,6 @@ if __name__ == '__main__':
     lm.create_log_table()
     for i in range(1000):
         wins, retries, prev_tried_words, given_word = w.play_wordle()
-        # print(wins, " : ", retries, " : ", tuple(prev_tried_words))
         temp_lst = []
         # insert prev_tried_words into the user_inp_words
         for ind, word in enumerate(prev_tried_words):

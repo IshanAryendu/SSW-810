@@ -6,7 +6,6 @@ from datetime import datetime
 def get_timestamp():
     # Converting datetime object to string
     dateTimeObj = datetime.now()
-    # timestampStr = dateTimeObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
     timestampStr = dateTimeObj.strftime("%Y-%m-%d (%H:%M:%S)")
     # 2022-04-27 17:35:28.010846
     # ct = datetime.now()
@@ -143,7 +142,6 @@ def insert_user_in_word(id, prev_tried_words):
         print(prev_tried_words)
         print('\n\n')
         data_tuple = tuple(prev_tried_words)
-        # cursor.execute(sqlite_insert_with_param, data_tuple)
         cursor.execute("INSERT INTO 'user_in_word' ('word_id','w1', 'w2', 'w3', 'w4', 'w5', 'w6') VALUES (?, ?, ?, ?, ?, ?, ?);", data_tuple)
         sqliteConnection.commit()
         print("data added successfully \n")
@@ -236,7 +234,6 @@ def insert_log(given_word):
         print('timestamp', timestamp, '\nip', ip, win_id, word_id)
         lst = [timestamp, ip, given_word, win_id, word_id]
         cursor.execute("INSERT INTO log (dt, ip, selected_word, win_id, word_id) VALUES(?, ?, ?, ?, ?)", (timestamp, ip, given_word, win_id, word_id))
-        # cursor.execute("INSERT INTO log (dt, ip, selected_word, win_id, word_id) VALUES(?, ?)",tuple(lst))
         sqliteConnection.commit()
         print("data added successfully \n")
         cursor.close()
@@ -261,10 +258,6 @@ def display_log():
             records = cursor.fetchall()
             # print(records)
             for row in records:
-                # developer = row[0]
-                # joining_Date = row[1]
-                # print(developer, " joined on", joiningDate)
-                # print("joining date type is", type(joining_Date))
                 print(row)
 
             cursor.close()
@@ -289,10 +282,6 @@ def display_words():
             records = cursor.fetchall()
 
             for row in records:
-                # developer = row[0]
-                # joining_Date = row[1]
-                # print(developer, " joined on", joiningDate)
-                # print("joining date type is", type(joining_Date))
                 print(row)
 
             cursor.close()
@@ -317,10 +306,6 @@ def display_stats():
         records = cursor.fetchall()
 
         for row in records:
-            # developer = row[0]
-            # joining_Date = row[1]
-            # print(developer, " joined on", joiningDate)
-            # print("joining date type is", type(joining_Date))
             print(row)
 
         cursor.close()
@@ -370,7 +355,6 @@ def select_in_range(start_ts, end_ts):
             print("sqlite connection is closed")
 
 if __name__ == '__main__':
-    # print(get_timestamp())
     select_in_range('2022-04-27 (18:44:44)', '2022-04-27 (18:46:07)')
 
 
