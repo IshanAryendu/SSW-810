@@ -250,7 +250,7 @@ if __name__ == '__main__':
         # insert into log
         lm.insert_log(given_word=given_word)
     inp = input("Do you want to specify a range of timestamp for search? [y/n]")
-    if inp.lower() == 'y' or inp.lower() == 'yes':
+    if inp.lower() in ('y', 'yes'):
         print("Enter the start timestamp and end timestamp in %Y-%m-%d (%H:%M:%S) format" \
               "eg. 2022-04-27 (18:44:44)")
         start_ts = input("start timestamp: ")
