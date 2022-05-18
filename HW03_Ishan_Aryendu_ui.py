@@ -359,5 +359,5 @@ class UI:
         except TypeError:
             print(f"Win percentage: {(0 / games_played) * 100}")
         finally:
-            print(f"Guess distribution: ", end='')
+            print("Guess distribution: ", end='')
             print(guess_dist)
