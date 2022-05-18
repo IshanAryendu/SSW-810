@@ -110,11 +110,10 @@ class UI:
         if len(prompt.strip()) != word_length:
             print(Fore.RED + f"Try again with a {word_length} letter word.")
             return False
-        elif not (bool(re.match('^[a-zA-Z]*$', prompt)) is True):
+        if not (bool(re.match('^[a-zA-Z]*$', prompt)) is True):
             print(Fore.RED + "Enter a word without numbers or special characters.")
             return False
-        else:
-            return True
+        return True
 
     def user_input(self, WORD_LENGTH: object, MAX_TRIES: object, retries: object, match: object, mismatch: object,
                    games_played: object, all_words: object, prev_tries: object,
@@ -139,7 +138,7 @@ class UI:
         try:
             if prompt == "":
                 return "quit"
-            elif self.valid_input(prompt, WORD_LENGTH):
+            if self.valid_input(prompt, WORD_LENGTH):
                 return prompt
         except ValueError:
             print("Please provide a proper Value! ")
@@ -207,7 +206,7 @@ class UI:
             if prompt == "quit":
                 self.exit_func()
                 break
-            elif prompt not in all_words:
+            if prompt not in all_words:
                 self.not_in_list()
                 continue
             if self.previously_tried(prompt, prev_tries):
@@ -241,7 +240,7 @@ class UI:
             if prompt == "quit":
                 self.exit_func()
                 return
-            elif prompt not in all_words:
+            if prompt not in all_words:
                 self.not_in_list()
                 self.auto_play(prompt, MAX_TRIES, WORD_LENGTH, match, mismatch, games_played, all_words, prev_tries,
                           given_word, retries,
@@ -276,8 +275,7 @@ class UI:
                                                                                               prompt,
                                                                                               retries)
                 return 1
-            else:
-                return "continue"
+            return "continue"
 
 
     def previously_tried(self, prompt, prev_tries):
@@ -287,8 +285,7 @@ class UI:
         if prompt.lower() in prev_tries:
             print(Fore.YELLOW + f"You have already tried {prompt}")
             return True
-        else:
-            return False
+        return False
 
 
     def set_char_color(self, letter_of_given_word, letter_of_input_word, given_word, match, mismatch, given_char_dict,
